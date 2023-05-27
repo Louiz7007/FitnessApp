@@ -3,4 +3,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Profile Strings -->
+    <string name="welcome_message">Herzlich willkommen bei FitnessMania!</string>
+    <string name="input_info_message">Bitte trag die benötigten Daten ein, damit wir dir optimal helfen können</string>
+    <string name="firstname">Vorname:</string>
+    <string name="lastname">Nachname:</string>
+    <string name="weight">Gewicht:</string>
+    <string name="create_profile">Profil erstellen</string>
+    <string name="workout_level">Aktivitätskategorie</string>
 </resources>
