@@ -12,4 +12,9 @@
     <string name="weight">Gewicht:</string>
     <string name="create_profile">Profil erstellen</string>
     <string name="workout_level">Aktivitätskategorie</string>
+
+    <!-- Home Strings -->
+    <string name="progress">Fortschritt:</string>
+    <string name="registered_trainings">Eingetragene Trainings:</string>
+    <string name="home">Übersicht:</string>
 </resources>
