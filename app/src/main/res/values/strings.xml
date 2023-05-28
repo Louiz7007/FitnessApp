@@ -16,5 +16,5 @@
     <!-- Home Strings -->
     <string name="progress">Fortschritt:</string>
     <string name="registered_trainings">Eingetragene Trainings:</string>
-    <string name="home">Übersicht:</string>
+    <string name="homeHead">Übersicht:</string>
 </resources>
