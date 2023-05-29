@@ -9,13 +9,15 @@
     <string name="input_info_message">Bitte trag die benötigten Daten ein, damit wir dir optimal helfen können</string>
     <string name="firstname">Vorname:</string>
     <string name="lastname">Nachname:</string>
-    <string name="weight">Gewicht:</string>
+    <string name="weight">Gewicht (kg):</string>
     <string name="age">Alter:</string>
     <string name="create_profile">Profil erstellen</string>
     <string name="workout_level">Aktivitätskategorie</string>
     <string name="snackbar_msg">ungenügend (bis 600 MET), niedrig (600-3999 MET),
         mittel (4000-7999 MET) und hoch (mehr als 8000 MET)</string>
     <string name="alter">Alter</string>
+    <string name="invalid_input_msg">Überprüfen Sie Ihre Eingaben nochmal!</string>
+    <string name="blank_input_msg_alert">Sie haben vergessen was einzugeben</string>
 
     <!-- WorkoutLevel -->
     <string-array name="workout_levels">

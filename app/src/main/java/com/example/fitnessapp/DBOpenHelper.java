@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static String DATABASE_NAME = "FitnessDB";
-    private static int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "FitnessDB";
+    private static final int DATABASE_VERSION = 1;
 
     private final String SELECT_BY_NAME = "SELECT * FROM user WHERE firstname = %s AND lastname = %s";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
@@ -79,11 +79,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public boolean userExists() {
         boolean result;
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM user", null);
-        if(cursor.moveToNext()){
-            result = true;
-        }else {
-            result = false;
-        }
+        result = cursor.moveToNext();
         cursor.close();
         return result;
     }

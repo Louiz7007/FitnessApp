@@ -107,7 +107,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -152,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_weight="1.5"
-                android:textSize="14pt" />
+                android:textSize="20pt" />
 
             <ImageView
                 android:id="@+id/infoImg"
