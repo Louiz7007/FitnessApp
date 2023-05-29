@@ -31,11 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void showInfo(View view) {
 
-        Snackbar.make(view, "ungenügend (< 600 MET-Minuten), niedrig (600-3999 " +
-                              "MET-\n" +
-                              "Minuten), mittel (4000-7999 MET-Minuten) und hoch (> 800 " +
-                              "MET-Minuten",
-                      Snackbar.LENGTH_LONG).setAction("CLOSE", s -> {
+        Snackbar.make(view, R.string.snackbar_msg,
+                      Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
         }).show();
     }
 
