@@ -14,7 +14,7 @@
     <string name="workout_level">Aktivitätskategorie</string>
 
     <!-- Home Strings -->
-    <string name="progress">Fortschritt:</string>
-    <string name="registered_trainings">Eingetragene Trainings:</string>
-    <string name="homeHead">Übersicht:</string>
+    <string name="progress">Fortschritt</string>
+    <string name="registered_trainings">Eingetragene Trainings</string>
+    <string name="homeHead">Übersicht</string>
 </resources>
