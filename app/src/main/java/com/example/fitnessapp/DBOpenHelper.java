@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Date;
+
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static String DATABASE_NAME = "FitnessDB";
@@ -19,6 +21,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
 
+    private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, date DATE, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
+
     public DBOpenHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -27,6 +31,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_TRAININGS);
+        db.execSQL(CREATE_TABLE_USER_TRAININGS);
     }
 
     @Override
@@ -54,6 +59,15 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         values.put("metValue", metValue);
         long rowId = getWritableDatabase().insert("trainings", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into Trainings_Table: " + rowId);
+    }
+
+    public void insertUserTraining(int idTraining, Date date, boolean success) {
+        ContentValues values = new ContentValues();
+        values.put("idTraining", idTraining);
+        values.put("date", date.getTime());
+        values.put("success", success);
+        long rowId = getWritableDatabase().insert("usertrainings", null, values);
+        Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
     }
 
     // Returns Cursor with all from trainings Table
