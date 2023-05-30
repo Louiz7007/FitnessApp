@@ -18,11 +18,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     private final String SELECT_BY_NAME = "SELECT * FROM user WHERE firstname = %s AND lastname = %s";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
+    private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
+    private final String SELECT_USERTRAINING_BY_DATE = "SELECT * FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.date = %s";
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
-
     private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, date DATE, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
-
     public DBOpenHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -68,6 +68,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         values.put("success", success);
         long rowId = getWritableDatabase().insert("usertrainings", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
+    }
+
+    // Returns Cursor with all from usertrainings Table
+    public Cursor selectAllfromUserTrainings() {
+        return getReadableDatabase().rawQuery("SELECT * FROM usertrainings", null);
+    }
+
+    public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
+        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, String.valueOf(idTraining), String.valueOf(date)), null);
+    }
+
+    // Returns Cursor with all from usertrainings inner joined on trainings by Date
+    public Cursor selectUserTrainingByDate(Date date) {
+        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, String.valueOf(date)), null);
     }
 
     // Returns Cursor with all from trainings Table
