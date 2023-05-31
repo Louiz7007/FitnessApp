@@ -106,9 +106,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public boolean userExists() {
-        boolean result;
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM user", null);
-        result = cursor.moveToNext();
+        boolean result = cursor.moveToNext();
         cursor.close();
         return result;
     }
