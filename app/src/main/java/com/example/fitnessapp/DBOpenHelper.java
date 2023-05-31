@@ -81,7 +81,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     // Returns Cursor with all from usertrainings inner joined on trainings by Date
-    public Cursor selectUserTrainingByDate(Date date) {
+    public Cursor selectUserTrainingByDate(Timestamp date) {
         return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, String.valueOf(date)), null);
     }
 
