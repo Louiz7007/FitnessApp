@@ -1,14 +1,8 @@
 package com.example.fitnessapp;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,9 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_LOCATION = 12345;
     private ActivityMainBinding binding;
-    private LocationManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,33 +36,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public Location getCurrentLocation() {
-
-
-        LocationManager locationManager =
-                (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                                                      Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this,
-                                              new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                                      Manifest.permission.ACCESS_COARSE_LOCATION}
-                    , REQUEST_LOCATION);
-
-        }
-        try {
-
-            return locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-
-    }
 
 }

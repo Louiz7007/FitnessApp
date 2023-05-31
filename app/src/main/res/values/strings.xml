@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FitnessApp</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Hinzufügen</string>
     <string name="title_notifications">Notifications</string>
 
     <!-- Profile Strings -->
@@ -23,6 +23,9 @@
     <string name="alter">Alter</string>
     <string name="invalid_input_msg">Überprüfen Sie Ihre Eingaben nochmal!</string>
     <string name="blank_input_msg_alert">Sie haben vergessen was einzugeben</string>
+    <string name="erstelle_neues_training">Erstelle Neues Training</string>
+    <string name="erstelle_neuen_trainingsplan">Erstelle Neuen Trainingsplan</string>
+    <string name="add_available_traings">Deine verfügbaren Trainingsplans:</string>
 
     <!-- WorkoutLevel -->
     <string-array name="workout_levels">
