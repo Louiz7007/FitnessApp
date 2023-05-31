@@ -6,7 +6,7 @@
 
     <!-- Profile Strings -->
     <string name="welcome_message">Herzlich willkommen bei FitnessMania!</string>
-    <string name="input_info_message">Bitte trag die benötigten Daten ein, damit wir dir optimal helfen können</string>
+    <string name="input_info_message">Bitte trage die benötigten Daten ein, damit wir dir optimal helfen können</string>
     <string name="firstname">Vorname:</string>
     <string name="lastname">Nachname:</string>
     <string name="weight">Gewicht (kg):</string>
