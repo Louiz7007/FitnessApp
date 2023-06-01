@@ -1,6 +1,7 @@
 package com.example.fitnessapp;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater ().inflate (R.menu.menu_options, menu);
+        menu.getItem(0).setIcon(R.drawable.setting_icon);
+        return super.onCreateOptionsMenu(menu);
     }
 
 }
