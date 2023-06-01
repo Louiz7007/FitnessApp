@@ -29,9 +29,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public DBOpenHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-    //public DBOpenHelper(@Nullable SettingsFragment context) {
-    //    super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    //}
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -56,20 +53,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         long rowId = getWritableDatabase().insert("user", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into user_Table: " + rowId);
     }
-    // Update a Row in the user Table
-    public void updateUser(String firstname, String lastname, int age, double weight, int workoutlevel) {
-        ContentValues values = new ContentValues();
-        values.put("firstname", firstname);
-        values.put("lastname", lastname);
-        values.put("age", age);
-        values.put("weight", weight);
-        values.put("workoutlevel", workoutlevel);
-
-        SQLiteDatabase database = getWritableDatabase();
-        long rowId = database.update("user", values, "firstname = ? AND lastname = ?", new String[]{firstname, lastname});
-        Log.d(DBOpenHelper.class.getSimpleName(), "Update user_Table: " + rowId);
-    }
-
 
     // Insert a Row into the Trainings Table
     public void insertTraining(String trainingName, String intensity, double metValue) {
@@ -157,8 +140,4 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    // Drop whole user Table
-    public void deleteUser() {
-        getWritableDatabase().delete("user", null, null);
-    }
 }

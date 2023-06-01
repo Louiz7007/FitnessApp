@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
 
-        for(int i = 0; i < 15; i++) {
+        for(int i = 0; i < 6; i++) {
             helper.testDatensatz();
             helper.testDatensatzZwei();
         }
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
+        final TextView textView = binding.viewProgress;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         cursor = helper.selectTodaysTraining();
         ArrayList<String> trainingList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, trainingList);
         binding.trainingsListView.setAdapter(adapter);
-        binding.textHome.setOnClickListener(v -> {
+        binding.viewProgress.setOnClickListener(v -> {
             helper.deleteUserTrainingAndTrainings();
         });
 

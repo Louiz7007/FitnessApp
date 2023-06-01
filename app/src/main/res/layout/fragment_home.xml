@@ -98,8 +98,9 @@
                 <ListView
                     android:id="@+id/trainingsListView"
                     android:layout_width="match_parent"
-                    android:layout_height="290dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="?attr/actionBarSize"
                     android:divider="@android:color/white"
                     android:dividerHeight="1dp"
                     android:paddingTop="25dp" />
