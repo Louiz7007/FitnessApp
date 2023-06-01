@@ -19,6 +19,9 @@
     <string name="registered_trainings">Eingetragene Trainings</string>
     <string name="homeHead">Übersicht</string>
     <string name="snackbar_MET_msg">ungenügend (bis 600 MET), niedrig (600-3999 MET),
+    <string name="arrowLeft">Pfeil Home links</string>
+    <string name="arrowRight">Pfeil Home rechts</string>
+    <string name="snackbar_msg">ungenügend (bis 600 MET), niedrig (600-3999 MET),
         mittel (4000-7999 MET) und hoch (mehr als 8000 MET)</string>
     <string name="snackbar_training_info">Erstellen Sie ihr individuelles Training. Danach wird es für Sie gespeichert, sodass Sie immer Zugriff darauf haben.</string>
     <string name="snackbar_training_day_info">Erstellen Sie ihren Trainingsplan. Dort können Sie mehrere Trainings einbauen und diese immer wieder verwenden.</string>
