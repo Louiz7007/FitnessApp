@@ -15,7 +15,14 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.fitnessapp.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_newTrainingFragment"
+            app:destination="@id/newTrainingFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_newTrainingPlanFragment"
+            app:destination="@id/newTrainingPlanFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -27,4 +34,14 @@
         android:name="com.example.fitnessapp.ProfileActivity"
         android:label="activity_profile"
         tools:layout="@layout/activity_profile" />
+    <fragment
+        android:id="@+id/newTrainingFragment"
+        android:name="com.example.fitnessapp.ui.dashboard.NewTrainingFragment"
+        android:label="Neues Training"
+        tools:layout="@layout/fragment_new_training" />
+    <fragment
+        android:id="@+id/newTrainingPlanFragment"
+        android:name="com.example.fitnessapp.ui.dashboard.NewTrainingPlanFragment"
+        android:label="Neuer Trainingsplan"
+        tools:layout="@layout/fragment_new_training_plan" />
 </navigation>
