@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.fitnessapp.R;
 import com.example.fitnessapp.databinding.FragmentDashboardBinding;
@@ -17,8 +18,8 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
@@ -28,6 +29,12 @@ public class DashboardFragment extends Fragment {
 
         binding.infoTrainingBtn.setOnClickListener(this::showInfoForNewTraining);
         binding.infoTrainingsPlanBtn.setOnClickListener(this::showInfoForNewTrainingDay);
+
+        binding.newTrainingBtn.setOnClickListener(v -> Navigation.findNavController(v).
+                navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingFragment()));
+
+        binding.newTrainingDayBtn.setOnClickListener(v -> Navigation.findNavController(v).
+                navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingPlanFragment()));
         return root;
     }
 
@@ -39,15 +46,13 @@ public class DashboardFragment extends Fragment {
 
     private void showInfoForNewTraining(View view) {
 
-        Snackbar.make(view, R.string.snackbar_training_info,
-                      Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
+        Snackbar.make(view, R.string.snackbar_training_info, Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
         }).show();
     }
 
     private void showInfoForNewTrainingDay(View view) {
 
-        Snackbar.make(view, R.string.snackbar_training_day_info,
-                      Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
+        Snackbar.make(view, R.string.snackbar_training_day_info, Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
         }).show();
     }
 }
