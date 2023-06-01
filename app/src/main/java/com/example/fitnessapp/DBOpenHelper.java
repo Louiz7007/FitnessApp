@@ -140,8 +140,4 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    // Drop whole user Table
-    public void dropTableUser() {
-        getWritableDatabase().rawQuery("DROP TABLE IF EXISTS user", null);
-    }
 }
