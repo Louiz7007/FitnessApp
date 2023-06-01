@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void showInfoLong(View view) {
 
-        Snackbar.make(view, R.string.snackbar_msg,
+        Snackbar.make(view, R.string.snackbar_MET_msg,
                       Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
         }).show();
     }

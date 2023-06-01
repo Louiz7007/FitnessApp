@@ -6,6 +6,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment {
     private static final int REQUEST_LOCATION = 12345;
     LocationManager manager;
     private FragmentHomeBinding binding;
-    private Location currentLocation;
+    private volatile boolean running;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,10 +53,22 @@ public class HomeFragment extends Fragment {
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         getCurrentLocation();
 
-
         return root;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.running = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.running = true;
+        new Thread(this::getCurrentLocation).start();
+
+    }
 
     @Override
     public void onDestroyView() {
@@ -63,31 +77,39 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void getCurrentLocation() {
-
-        if (ActivityCompat.checkSelfPermission(getContext(),
-                                               Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getContext(),
-                                                      Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(),
-                                              new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                                                      Manifest.permission.ACCESS_COARSE_LOCATION}
-                    , REQUEST_LOCATION);
-
-        }
-
-        LocationListener listener = (location -> {
-
-            currentLocation = location;
-            getWeatherInfos(location);
-
-        });
-
-
-        manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, listener);
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
+
+    public void getCurrentLocation() {
+        while (running) {
+            if (ActivityCompat.checkSelfPermission(getContext(),
+                                                   Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(getContext(),
+                                                          Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                                                  new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                                          Manifest.permission.ACCESS_COARSE_LOCATION}
+                        , REQUEST_LOCATION);
+            }
+            Handler handler = new Handler(Looper.getMainLooper());
+
+            try {
+
+                handler.post(() -> {
+                    LocationListener listener = (location -> {
+                        getWeatherInfos(location);
+                    });
+                    manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, listener);
+                });
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     private void getWeatherInfos(Location location) {
 
@@ -108,11 +130,11 @@ public class HomeFragment extends Fragment {
 
             JSONObject json = new JSONObject(builder.toString());
 
-            getActivity().runOnUiThread(() -> {
+            //getActivity().runOnUiThread(() -> {
 
-                binding.textHome.setText(json.toString());
+            binding.textHome.setText(json.toString());
 
-            });
+            //});
 
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
