@@ -18,6 +18,8 @@
     <string name="progress">Fortschritt</string>
     <string name="registered_trainings">Eingetragene Trainings</string>
     <string name="homeHead">Übersicht</string>
+    <string name="arrowLeft">Pfeil Home links</string>
+    <string name="arrowRight">Pfeil Home rechts</string>
     <string name="snackbar_msg">ungenügend (bis 600 MET), niedrig (600-3999 MET),
         mittel (4000-7999 MET) und hoch (mehr als 8000 MET)</string>
     <string name="alter">Alter</string>
