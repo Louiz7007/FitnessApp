@@ -25,6 +25,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.data.AdapterTodayTraining;
+import com.example.fitnessapp.data.AdapterTraining;
+import com.example.fitnessapp.data.TodayTraining;
+import com.example.fitnessapp.data.TodayTrainingList;
+import com.example.fitnessapp.data.Training;
+import com.example.fitnessapp.data.TrainingList;
 import com.example.fitnessapp.databinding.FragmentHomeBinding;
 
 import org.json.JSONException;
@@ -35,6 +41,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -51,9 +61,11 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
-
-        helper.testDatensatzZwei();
-        cursor = helper.selectTodaysTraining();
+        final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        helper.insertUserTraining(1, sdf3.format(timestamp), true);
+        helper.insertUserTraining(2, sdf3.format(timestamp), false);
+        helper.insertUserTraining(3, sdf3.format(timestamp), true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,19 +81,16 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.viewProgress;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        cursor = helper.selectTodaysTraining();
-        ArrayList<String> trainingList = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String success = +cursor.getInt(3) == 0 ? "Offen" : "Beendet";
-            trainingList.add(cursor.getString(0) + " | " + cursor.getString(1) +
-                                     " | " + cursor.getString(2) + " | " + success);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
-                                                          trainingList);
-        binding.trainingsListView.setAdapter(adapter);
-        binding.viewProgress.setOnClickListener(v -> {
-          //  helper.deleteUserTrainingAndTrainings();
-        });
+//        cursor = helper.selectTodaysTraining();
+//        ArrayList<String> trainingList = new ArrayList<>();
+//        while (cursor.moveToNext()) {
+//            String success = +cursor.getInt(3) == 0 ? "Offen" : "Beendet";
+//            trainingList.add(cursor.getString(0) + " | " + cursor.getString(1) +
+//                                     " | " + cursor.getString(2) + " | " + success);
+//        }
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
+//                                                          trainingList);
+//        binding.trainingsListView.setAdapter(adapter);
 
         return binding.getRoot();
     }
