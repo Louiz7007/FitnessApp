@@ -32,12 +32,16 @@ public class NewTrainingFragment extends Fragment {
 
         ArrayList<Training> trainingList = new TrainingList().getTrainingList();
 
-        binding.textView.setText("New Training");
 
         AdapterTraining adapterTraining = new AdapterTraining( binding.getRoot().getContext(), trainingList);
 
         binding.listviewTrainings.setAdapter(adapterTraining);
-    }
+        binding.listviewTrainings.setOnItemClickListener((parent, view, position, id) -> {
+            Training training = trainingList.get(position);
+            binding.textView.setText(training.getName());
+        });
+        }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
