@@ -53,6 +53,10 @@ public class HomeFragment extends Fragment {
         helper = new DBOpenHelper(getActivity());
 
         helper.testDatensatzZwei();
+        for (int i = 0; i < 6; i++) {
+            helper.testDatensatz();
+            helper.testDatensatzZwei();
+        }
         cursor = helper.selectTodaysTraining();
     }
 
@@ -79,9 +83,6 @@ public class HomeFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
                                                           trainingList);
         binding.trainingsListView.setAdapter(adapter);
-        binding.viewProgress.setOnClickListener(v -> {
-          //  helper.deleteUserTrainingAndTrainings();
-        });
 
         return binding.getRoot();
     }
