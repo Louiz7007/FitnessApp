@@ -30,13 +30,7 @@ public class NewTrainingPlanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        OnBackPressedCallback callback = new OnBackPressedCallback(true ) {
-            @Override
-            public void handleOnBackPressed() {
-                Navigation.findNavController(requireView()).navigate(R.id.action_newTrainingPlanFragment_to_navigation_dashboard);
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
         return inflater.inflate(R.layout.fragment_new_training_plan, container, false);
     }
 }
