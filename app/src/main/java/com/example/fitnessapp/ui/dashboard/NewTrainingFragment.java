@@ -1,5 +1,6 @@
 package com.example.fitnessapp.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -38,7 +39,8 @@ public class NewTrainingFragment extends Fragment {
         binding.listviewTrainings.setAdapter(adapterTraining);
         binding.listviewTrainings.setOnItemClickListener((parent, view, position, id) -> {
             Training training = trainingList.get(position);
-            binding.textView.setText(training.getName());
+            startActivity(new Intent(binding.getRoot().getContext(), AddNewTrainingActivity.class)
+                    .putExtra("training", training));
         });
         }
 

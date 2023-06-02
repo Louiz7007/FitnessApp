@@ -5,18 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.fitnessapp.R;
 
 import java.util.ArrayList;
 
-public class AdapterTraining extends BaseAdapter {
+public class AdapterTrainingWithCheckbox extends BaseAdapter {
 
     Context context;
     ArrayList<Training> trainingList;
+    ArrayList<Training> selectedTrainingList = new ArrayList<>();
 
-    public AdapterTraining(Context context, ArrayList<Training> trainingList) {
+
+    public AdapterTrainingWithCheckbox(Context context, ArrayList<Training> trainingList) {
         this.context = context;
         this.trainingList = trainingList;
     }
@@ -40,20 +43,37 @@ public class AdapterTraining extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_training, parent,
-                                                                false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_training_withcheckbox, parent,
+                    false);
         }
 
         Training currentTraining = (Training) getItem(position);
 
         TextView textViewName = convertView.findViewById(R.id.textLVName);
         TextView textViewIntesity = convertView.findViewById(R.id.textLVIntensity);
-        TextView textViewMet = convertView.findViewById(R.id.textViewLVMetValue);
+        CheckBox checkBox = convertView.findViewById(R.id.checkBox);
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkBox.isChecked()) {
+                    selectedTrainingList.add(currentTraining);
+                } else {
+                    selectedTrainingList.remove(currentTraining);
+                }
+            }
+        });
 
         textViewName.setText(currentTraining.getName());
         textViewIntesity.setText(currentTraining.getIntensity());
-        textViewMet.setText(String.valueOf(currentTraining.getMetValue()));
+
+
 
         return convertView;
+    }
+
+
+    public ArrayList<Training> getSelectedTrainingList() {
+        return selectedTrainingList;
     }
 }

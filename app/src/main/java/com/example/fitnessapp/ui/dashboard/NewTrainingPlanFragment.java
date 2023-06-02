@@ -12,18 +12,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.databinding.FragmentNewTrainingBinding;
+import com.example.fitnessapp.databinding.FragmentNewTrainingPlanBinding;
 
 
 public class NewTrainingPlanFragment extends Fragment {
 
 
-
+    FragmentNewTrainingPlanBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = FragmentNewTrainingPlanBinding.inflate(getLayoutInflater());
+
+        Bundle bundle = new Bundle();
 
 
+        binding.nameForTrainingPlanBtn.setOnClickListener(v -> {
+            bundle.putString("trainingName", binding.trainingsPlanNameEditText.getText().toString());
+            Navigation.findNavController(v).navigate(R.id.action_newTrainingPlanFragment_to_newTraingsPlanWithTrainingFragment, bundle);
+        });
 
     }
 
@@ -31,6 +40,6 @@ public class NewTrainingPlanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_new_training_plan, container, false);
+        return binding.getRoot();
     }
 }
