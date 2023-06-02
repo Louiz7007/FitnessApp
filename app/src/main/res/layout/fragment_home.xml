@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azur"
+    android:background="@android:color/system_accent1_100"
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
@@ -16,14 +16,14 @@
         <!-- Forthright im Kreisdiagramm -->
 
         <LinearLayout
-            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            app:cardElevation="4dp"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"
             app:cardBackgroundColor="#80FFFFFF"
-            android:orientation="vertical">
+            app:cardElevation="4dp">
 
 
             <TextView
@@ -40,15 +40,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imageButtonArrowLeft"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/arrow_left"
-                    android:contentDescription="@string/arrowLeft" />
+                    android:contentDescription="@string/arrowLeft"
+                    android:src="@drawable/arrow_left" />
 
                 <ProgressBar
                     android:id="@+id/progressBarDay"
@@ -67,46 +67,46 @@
                     android:id="@+id/imageButtonArrowRight"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/arrow_right"
-                    android:contentDescription="@string/arrowRight" />
+                    android:contentDescription="@string/arrowRight"
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
 
         </LinearLayout>
 
         <!-- Eingetragene Trainings -->
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:cardBackgroundColor="#80FFFFFF"
+            app:cardElevation="4dp">
+
+            <TextView
+                android:id="@+id/TextViewRegisteredTrainings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#80FFFFFF"
-                android:orientation="vertical"
-                android:layout_marginBottom="50dp">
+                android:text="@string/registered_trainings"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/TextViewRegisteredTrainings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/registered_trainings"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+            <ListView
+                android:id="@+id/trainingsListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="?attr/actionBarSize"
+                android:divider="@android:color/white"
+                android:dividerHeight="1dp"
+                android:paddingTop="25dp" />
+        </LinearLayout>
 
-                <ListView
-                    android:id="@+id/trainingsListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="?attr/actionBarSize"
-                    android:divider="@android:color/white"
-                    android:dividerHeight="1dp"
-                    android:paddingTop="25dp" />
-            </LinearLayout>
-
-            <!-- Passende Schriftfarbe -->
+        <!-- Passende Schriftfarbe -->
 
     </LinearLayout>
 
