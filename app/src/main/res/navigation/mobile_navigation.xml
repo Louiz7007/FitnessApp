@@ -42,9 +42,6 @@
         <action
             android:id="@+id/action_newTrainingPlanFragment_to_newTraingsPlanWithTrainingFragment"
             app:destination="@id/newTraingsPlanWithTrainingFragment" />
-        <action
-            android:id="@+id/action_newTrainingPlanFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
     </fragment>
     <fragment
         android:id="@+id/newTraingsPlanWithTrainingFragment"
@@ -53,7 +50,7 @@
         tools:layout="@layout/fragment_new_traings_plan_with_training" />
     <fragment
         android:id="@+id/newTrainingFragment"
-        android:name="com.example.fitnessapp.NewTrainingFragment"
+        android:name="com.example.fitnessapp.ui.dashboard.NewTrainingFragment"
         android:label="Neues Training"
         tools:layout="@layout/fragment_new_training" />
 </navigation>

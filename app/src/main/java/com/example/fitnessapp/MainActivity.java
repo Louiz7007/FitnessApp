@@ -36,5 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        return Navigation.findNavController(this, R.id.nav_host_fragment_activity_main).navigateUp();
+    }
 }

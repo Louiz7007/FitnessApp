@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
                                                           trainingList);
         binding.trainingsListView.setAdapter(adapter);
         binding.viewProgress.setOnClickListener(v -> {
-            helper.deleteUserTrainingAndTrainings();
+          //  helper.deleteUserTrainingAndTrainings();
         });
 
         return binding.getRoot();

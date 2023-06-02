@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/system_accent1_100"
-    tools:context=".NewTrainingFragment">
+    tools:context=".ui.dashboard.NewTrainingFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         android:orientation="vertical">
@@ -19,13 +18,14 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+
             android:text="@string/selectNewTraining_msg"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <ListView
+            android:id="@+id/listviewTrainings"
             android:layout_width="match_parent"
             android:layout_height="550dp"
             android:layout_marginTop="10dp"
