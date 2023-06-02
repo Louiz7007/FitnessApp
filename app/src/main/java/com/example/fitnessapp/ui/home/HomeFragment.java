@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment {
     LocationManager manager;
     LocationListener listener;
     private FragmentHomeBinding binding;
-    private ListView listView;
     private DBOpenHelper helper;
     private Cursor cursor;
     private Thread thread;
@@ -53,6 +52,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
 
+        helper.testDatensatzZwei();
         for (int i = 0; i < 6; i++) {
             helper.testDatensatz();
             helper.testDatensatzZwei();
@@ -83,9 +83,6 @@ public class HomeFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
                                                           trainingList);
         binding.trainingsListView.setAdapter(adapter);
-        binding.viewProgress.setOnClickListener(v -> {
-            helper.deleteUserTrainingAndTrainings();
-        });
 
         return binding.getRoot();
     }
