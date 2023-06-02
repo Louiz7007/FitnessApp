@@ -19,7 +19,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "FitnessDB";
     private static final int DATABASE_VERSION = 1;
 
-    private final String SELECT_BY_NAME = "SELECT * FROM user WHERE firstname = %s AND lastname = %s";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
     private final String SELECT_USERTRAINING_BY_DATE = "SELECT trainingName, intensity, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
