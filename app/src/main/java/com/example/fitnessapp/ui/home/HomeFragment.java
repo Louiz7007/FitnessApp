@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,7 +53,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
 
-        for (int i = 0; i < 15; i++) {
+        for(int i = 0; i < 6; i++) {
             helper.testDatensatz();
             helper.testDatensatzZwei();
         }
@@ -63,15 +64,15 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         manager = getActivity().getSystemService(LocationManager.class);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), binding.textHome::setText);
-
-
+        final TextView textView = binding.viewProgress;
+        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         cursor = helper.selectTodaysTraining();
         ArrayList<String> trainingList = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -79,12 +80,11 @@ public class HomeFragment extends Fragment {
             trainingList.add(cursor.getString(0) + " | " + cursor.getString(1) +
                                      " | " + cursor.getString(2) + " | " + success);
         }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout
-            .list_item, trainingList);
-            binding.trainingsListView.setAdapter(adapter);
-            binding.textHome.setOnClickListener(v -> {
-                helper.deleteUserTrainingAndTrainings();
-            });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, trainingList);
+        binding.trainingsListView.setAdapter(adapter);
+        binding.viewProgress.setOnClickListener(v -> {
+            helper.deleteUserTrainingAndTrainings();
+        });
 
         return binding.getRoot();
     }

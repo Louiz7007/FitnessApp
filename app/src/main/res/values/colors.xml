@@ -11,4 +11,5 @@
     <color name="start_color">#FFC107</color>
     <color name="center_color">#FFEB3B</color>
     <color name="end_color">#CDDC39</color>
+    <color name="azur">#87CEEB</color>
 </resources>
