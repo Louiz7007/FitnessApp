@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
 
-        for(int i = 0; i < 6; i++) {
+        for (int i = 0; i < 6; i++) {
             helper.testDatensatz();
             helper.testDatensatzZwei();
         }
@@ -80,7 +80,8 @@ public class HomeFragment extends Fragment {
             trainingList.add(cursor.getString(0) + " | " + cursor.getString(1) +
                                      " | " + cursor.getString(2) + " | " + success);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, trainingList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
+                                                          trainingList);
         binding.trainingsListView.setAdapter(adapter);
         binding.viewProgress.setOnClickListener(v -> {
             helper.deleteUserTrainingAndTrainings();
@@ -156,7 +157,7 @@ public class HomeFragment extends Fragment {
             JSONObject json = new JSONObject(builder.toString());
 
 
-            binding.textHome.setText(json.toString());
+            binding.viewProgress.setText(json.toString());
 
             manager.removeUpdates(listener);
 

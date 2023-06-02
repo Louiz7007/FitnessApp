@@ -27,11 +27,8 @@ public class DashboardFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        binding.infoTrainingBtn.setOnClickListener(this::showInfoForNewTraining);
         binding.infoTrainingsPlanBtn.setOnClickListener(this::showInfoForNewTrainingDay);
 
-        binding.newTrainingBtn.setOnClickListener(v -> Navigation.findNavController(v).
-                navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingFragment()));
 
         binding.newTrainingDayBtn.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingPlanFragment()));
@@ -44,11 +41,6 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
 
-    private void showInfoForNewTraining(View view) {
-
-        Snackbar.make(view, R.string.snackbar_training_info, Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
-        }).show();
-    }
 
     private void showInfoForNewTrainingDay(View view) {
 

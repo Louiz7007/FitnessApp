@@ -18,11 +18,9 @@
     <string name="progress">Fortschritt</string>
     <string name="registered_trainings">Eingetragene Trainings</string>
     <string name="homeHead">Übersicht</string>
-    <string name="snackbar_MET_msg">ungenügend (bis 600 MET), niedrig (600-3999 MET),
+    <string name="snackbar_MET_msg">ungenügend (bis 600 MET), niedrig (600–3999 MET), mittel (4000-7999 MET) und hoch (mehr als 8000 MET)</string>
     <string name="arrowLeft">Pfeil Home links</string>
     <string name="arrowRight">Pfeil Home rechts</string>
-    <string name="snackbar_msg">ungenügend (bis 600 MET), niedrig (600-3999 MET),
-        mittel (4000-7999 MET) und hoch (mehr als 8000 MET)</string>
     <string name="snackbar_training_info">Erstellen Sie ihr individuelles Training. Danach wird es für Sie gespeichert, sodass Sie immer Zugriff darauf haben.</string>
     <string name="snackbar_training_day_info">Erstellen Sie ihren Trainingsplan. Dort können Sie mehrere Trainings einbauen und diese immer wieder verwenden.</string>
     <string name="alter">Alter</string>
@@ -30,7 +28,7 @@
     <string name="blank_input_msg_alert">Sie haben vergessen was einzugeben</string>
     <string name="erstelle_neues_training">Erstelle Neues Training</string>
     <string name="erstelle_neuen_trainingsplan">Erstelle Neuen Trainingsplan</string>
-    <string name="add_available_traings">Deine verfügbaren Trainingsplans:</string>
+    <string name="add_available_traings">Verfügbare Trainingspläne</string>
 
     <!-- WorkoutLevel -->
     <string-array name="workout_levels">
@@ -41,5 +39,7 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_training_program_msg">Geben Sie einen Namen für ihr persönliches Trainingsprogramm ein:</string>
+    <string name="weiter">Weiter</string>
 
 </resources>
