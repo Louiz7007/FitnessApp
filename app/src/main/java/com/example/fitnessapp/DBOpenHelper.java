@@ -112,7 +112,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
-        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, String.valueOf(idTraining), String.valueOf(date)), null);
+        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, idTraining, date), null);
     }
 
     // Returns Cursor with all from trainings Table
