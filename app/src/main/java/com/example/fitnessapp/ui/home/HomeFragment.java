@@ -53,10 +53,6 @@ public class HomeFragment extends Fragment {
         helper = new DBOpenHelper(getActivity());
 
         helper.testDatensatzZwei();
-        for (int i = 0; i < 6; i++) {
-            helper.testDatensatz();
-            helper.testDatensatzZwei();
-        }
         cursor = helper.selectTodaysTraining();
     }
 
