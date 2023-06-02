@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment {
     LocationManager manager;
     LocationListener listener;
     private FragmentHomeBinding binding;
-    private ListView listView;
     private DBOpenHelper helper;
     private Cursor cursor;
     private Thread thread;
@@ -53,10 +52,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
 
-        for (int i = 0; i < 6; i++) {
-            helper.testDatensatz();
-            helper.testDatensatzZwei();
-        }
+        helper.testDatensatzZwei();
         cursor = helper.selectTodaysTraining();
     }
 
