@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/system_accent1_100"
-    tools:context=".NewTraingsPlanWithTrainingFragment">
+    tools:context=".ui.dashboard.NewTraingsPlanWithTrainingFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -13,6 +13,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical">
 
         <TextView
@@ -27,15 +28,19 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="400dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="200dp" />
+            android:layout_marginBottom="0dp">
+
+        </ListView>
 
         <Button
-            android:id="@+id/write_Training_to_DB_btn"
+            android:id="@+id/createTrainingsPlan_btn"
             android:layout_width="match_parent"
-            android:layout_height="77dp"
-            android:text="Button" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:text="Erstelle einen Trainingsplan!" />
 
     </LinearLayout>
 

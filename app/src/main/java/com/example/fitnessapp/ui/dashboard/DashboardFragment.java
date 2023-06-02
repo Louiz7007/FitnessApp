@@ -18,6 +18,8 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
@@ -32,7 +34,17 @@ public class DashboardFragment extends Fragment {
 
         binding.newTrainingDayBtn.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingPlanFragment()));
+
+        binding.infoTrainingBtn.setOnClickListener(this::showInfoForNewTraining);
+
+        binding.newTraingBtn.setOnClickListener(v -> Navigation.findNavController(v).
+                navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingFragment()));
         return root;
+    }
+
+    private void showInfoForNewTraining(View view) {
+        Snackbar.make(view, R.string.snackbar_training_info, Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
+        }).show();
     }
 
     @Override

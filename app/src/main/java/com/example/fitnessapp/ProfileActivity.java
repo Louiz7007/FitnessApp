@@ -94,14 +94,10 @@ public class ProfileActivity extends AppCompatActivity {
 
     private boolean checkForBlankInput() {
 
-        if (binding.editTextFirstname.getText().toString().isEmpty() ||
+        return binding.editTextFirstname.getText().toString().isEmpty() ||
                 binding.editTextLastname.getText().toString().isEmpty() ||
                 binding.editTextWeight.getText().toString().isEmpty() ||
-                binding.textViewAge.getText().toString().isEmpty()) {
-
-            return true;
-        }
-        return false;
+                binding.textViewAge.getText().toString().isEmpty();
 
     }
 }
