@@ -16,7 +16,7 @@
 
     <!-- Home Strings -->
     <string name="progress">Fortschritt</string>
-    <string name="registered_trainings">Eingetragene Trainings</string>
+    <string name="registered_trainings">Heutige Trainings</string>
     <string name="homeHead">Übersicht</string>
     <string name="snackbar_MET_msg">ungenügend (bis 600 MET), niedrig (600–3999 MET), mittel (4000-7999 MET) und hoch (mehr als 8000 MET)</string>
     <string name="arrowLeft">Pfeil Home links</string>
@@ -29,6 +29,13 @@
     <string name="erstelle_neues_training">Erstelle Neues Training</string>
     <string name="erstelle_neuen_trainingsplan">Erstelle Neuen Trainingsplan</string>
     <string name="add_available_traings">Verfügbare Trainingspläne</string>
+
+    <!-- Trainings Today -->
+    <string name="training_art">Art</string>
+    <string name="training_intensity">Intensität</string>
+    <string name="training_met_value">MetValue</string>
+    <string name="training_status">Status</string>
+
 
     <!-- WorkoutLevel -->
     <string-array name="workout_levels">

@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.fitnessapp.data.TodayTraining;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -87,10 +89,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into user_Table: " + rowId);
     }
 
-    public void insertUserTraining(int idTraining, Timestamp datetime, boolean success) {
+    public void insertUserTraining(int idTraining, String datetime, boolean success) {
         ContentValues values = new ContentValues();
         values.put("idTraining", idTraining);
-        values.put("datetime", datetime.getTime());
+        values.put("datetime", datetime);
         values.put("success", success);
         long rowId = getWritableDatabase().insert("usertrainings", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
@@ -101,17 +103,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return getReadableDatabase().rawQuery("SELECT * FROM usertrainings", null);
     }
 
-    public void testDatensatzZwei() {
-        ContentValues values = new ContentValues();
-        values = new ContentValues();
-        values.put("idTraining", 1);
-        values.put("datetime", String.format("%s 00:00:00", Date.valueOf(String.valueOf(LocalDate.now()))));
-        values.put("success", 0);
-        long rowId = getWritableDatabase().insert("usertrainings", null, values);
-    }
-
-    public Cursor selectTodaysTraining() {
-        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, Date.valueOf(String.valueOf(LocalDate.now())), Date.valueOf(String.valueOf(LocalDate.now()))), null);
+    public ArrayList<TodayTraining> selectTodaysTraining() {
+        ArrayList<TodayTraining> todayTrainingsList = new ArrayList<>();
+        Cursor cursor = getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, Date.valueOf(String.valueOf(LocalDate.now())), Date.valueOf(String.valueOf(LocalDate.now()))), null);
+        while(cursor.moveToNext()) {
+            boolean success = cursor.getInt(3) == 0 ? false : true;
+            todayTrainingsList.add(new TodayTraining(cursor.getString(0), cursor.getString(1), cursor.getDouble(2), success));
+        }
+        return todayTrainingsList;
     }
 
     public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
