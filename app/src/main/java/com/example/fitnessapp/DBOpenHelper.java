@@ -9,8 +9,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.fitnessapp.data.TodayTraining;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -23,7 +21,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
-    private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
+    private final String SELECT_USERTRAINING_BY_DATE = "SELECT trainingName, intensity, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
     private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
@@ -89,10 +87,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into user_Table: " + rowId);
     }
 
-    public void insertUserTraining(int idTraining, String datetime, boolean success) {
+    public void insertUserTraining(int idTraining, Timestamp datetime, boolean success) {
         ContentValues values = new ContentValues();
         values.put("idTraining", idTraining);
-        values.put("datetime", datetime);
+        values.put("datetime", datetime.getTime());
         values.put("success", success);
         long rowId = getWritableDatabase().insert("usertrainings", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
@@ -103,37 +101,21 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         return getReadableDatabase().rawQuery("SELECT * FROM usertrainings", null);
     }
 
-    public ArrayList<TodayTraining> selectTodaysTraining() {
-        ArrayList<TodayTraining> todayTrainingsList = new ArrayList<>();
-        Cursor cursor = getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, Date.valueOf(String.valueOf(LocalDate.now())), Date.valueOf(String.valueOf(LocalDate.now()))), null);
-        while(cursor.moveToNext()) {
-            boolean success = cursor.getInt(4) == 0 ? false : true;
-            todayTrainingsList.add(new TodayTraining(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), success));
-        }
-        return todayTrainingsList;
-    }
-
-    public void updateUsertrainingsStatus(int id, boolean success) {
+    public void testDatensatzZwei() {
         ContentValues values = new ContentValues();
-        values.put("success", success);
-        getWritableDatabase().update("usertrainings", values, "_id=?", new String[]{String.valueOf(id)});
+        values = new ContentValues();
+        values.put("idTraining", 1);
+        values.put("datetime", String.format("%s 00:00:00", Date.valueOf(String.valueOf(LocalDate.now()))));
+        values.put("success", 0);
+        long rowId = getWritableDatabase().insert("usertrainings", null, values);
     }
 
-    public Integer selectWorkoutlevel() {
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT workoutlevel FROM user", null);
-        if(cursor.moveToNext()){
-            return cursor.getInt(0);
-        }
-        return 0;
+    public Cursor selectTodaysTraining() {
+        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, Date.valueOf(String.valueOf(LocalDate.now())), Date.valueOf(String.valueOf(LocalDate.now()))), null);
     }
-
 
     public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
         return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, String.valueOf(idTraining), String.valueOf(date)), null);
-    }
-
-    public void deleteUsertrainings() {
-        getWritableDatabase().delete("usertrainings", null, null);
     }
 
     // Returns Cursor with all from trainings Table
