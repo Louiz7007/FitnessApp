@@ -40,8 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void checkForExisitngProfile() {
         if (helper.userExists()) {
+            helper.close();
             startActivity(new Intent(this, MainActivity.class));
-
         }
 
     }
