@@ -19,9 +19,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "FitnessDB";
     private static final int DATABASE_VERSION = 1;
 
+    private final String SELECT_BY_NAME = "SELECT * FROM user WHERE firstname = %s AND lastname = %s";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
     private final String SELECT_USERTRAINING_BY_DATE = "SELECT trainingName, intensity, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
+    private final String SELECT_ALL_TRAININGS = "SELECT trainingName, intensity, metValue FROM trainings";
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
     private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
@@ -46,12 +48,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_TRAININGSPLAN);
         db.execSQL(CREATE_TABLE_USER_TRAININGS);
         db.execSQL(CREATE_TRAININGS);
-        db.execSQL("INSERT INTO trainingsplan VALUES(1, \"Monday\", 1)");
     }
 
     // Returns all Entries of the trainings_Table
     public Cursor selectAllTrainings() {
-        return getReadableDatabase().rawQuery("SELECT * FROM trainings", null);
+        return getReadableDatabase().rawQuery(SELECT_ALL_TRAININGS, null);
     }
 
     // Create a new Trainingsplan
@@ -64,10 +65,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public void deleteTrainingsplanByName(String name) {
         getWritableDatabase().delete("trainingsplan", name + "=" + name,null);
-    }
-
-    public Cursor selectAllFromTrainingsplan() {
-        return getWritableDatabase().rawQuery("SELECT * FROM trainingsplan", null);
     }
 
     @Override
@@ -115,7 +112,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
-        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, idTraining, date), null);
+        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, String.valueOf(idTraining), String.valueOf(date)), null);
     }
 
     // Returns Cursor with all from trainings Table
