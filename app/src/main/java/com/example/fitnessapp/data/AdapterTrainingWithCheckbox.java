@@ -54,6 +54,8 @@ public class AdapterTrainingWithCheckbox extends BaseAdapter {
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
 
         checkBox.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
                 if (checkBox.isChecked()) {

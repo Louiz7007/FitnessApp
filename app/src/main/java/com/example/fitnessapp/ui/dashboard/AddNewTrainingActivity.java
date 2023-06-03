@@ -57,6 +57,7 @@ public class AddNewTrainingActivity extends AppCompatActivity{
                 date = year1 + "-" + month2 + "-" + day;
                 timestamp = Timestamp.valueOf(date + " 00:00:00.000000000");
                 training.setDate(timestamp);
+
                 binding.editTextDate.setText(date);
             }, year, month, dayOfMonth);
 

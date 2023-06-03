@@ -49,6 +49,8 @@ public class NewTraingsPlanWithTrainingFragment extends Fragment {
             }
 
             adapterTraining.getSelectedTrainingList().forEach(training -> {
+
+
                 trainingsPlan.addTraining(training);
             });
 
