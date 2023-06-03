@@ -2,30 +2,20 @@ package com.example.fitnessapp.data;
 
 public class TodayTraining {
 
-    private int id;
     private String name;
     private String intensity;
-    private double duration;
     private double metValue;
     private boolean success;
 
-    public TodayTraining(int id, String name, String type, double duration, double metValue, boolean success) {
-        this.id = id;
+    public TodayTraining(String name, String type, double speed, boolean success) {
         this.name = name;
         this.intensity = type;
-        this.duration = duration;
-        this.metValue = metValue;
+        this.metValue = speed;
         this.success = success;
     }
-
-    public int getId() {return id;}
 
     public boolean getSuccess() {
         return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     public String getName() {
@@ -40,5 +30,4 @@ public class TodayTraining {
         return metValue;
     }
 
-    public double getDuration() {return duration;}
 }

@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -17,12 +17,10 @@ public class AdapterTodayTraining extends BaseAdapter {
 
     Context context;
     ArrayList<TodayTraining> todayTrainingsList;
-    DBOpenHelper helper;
 
-    public AdapterTodayTraining(Context context, ArrayList<TodayTraining> todayTrainingsList, DBOpenHelper helper) {
+    public AdapterTodayTraining(Context context, ArrayList<TodayTraining> todayTrainingsList) {
         this.context = context;
         this.todayTrainingsList = todayTrainingsList;
-        this.helper = helper;
     }
 
     @Override
@@ -47,35 +45,19 @@ public class AdapterTodayTraining extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.listview_today_training, parent,
                                                                 false);
         }
-        todayTrainingsList = helper.selectTodaysTraining();
 
         TodayTraining currentTraining = (TodayTraining) getItem(position);
 
         TextView textViewName = (TextView) convertView.findViewById(R.id.textViewLVName);
-        TextView textViewIntensity = (TextView) convertView.findViewById(R.id.textViewLVIntensity);
-        TextView textViewDur = (TextView) convertView.findViewById(R.id.textViewLVDuration);
-        TextView success = (TextView) convertView.findViewById(R.id.textViewLVSuccess);
-        Button changeSuccess = (Button) convertView.findViewById(R.id.buttonChangeSuccess);
+        TextView textViewIntesity = (TextView) convertView.findViewById(R.id.textViewLVIntensity);
+        TextView textViewMet = (TextView) convertView.findViewById(R.id.textViewLVMetValue);
+        TextView textViewSucc = (TextView) convertView.findViewById(R.id.textViewLVSuccess);
 
         textViewName.setText(currentTraining.getName());
-        textViewIntensity.setText(currentTraining.getIntensity());
-        textViewDur.setText(String.valueOf(currentTraining.getDuration()));
-        String successString = currentTraining.getSuccess() == true ? "Erl." : "Offen";
-        success.setText(successString);
-
-        changeSuccess.setOnClickListener(v -> {
-            if(currentTraining.getSuccess()) {
-                currentTraining.setSuccess(false);
-                helper.updateUsertrainingsStatus(currentTraining.getId(), false);
-                String newSuccessString = "Offen";
-                success.setText(newSuccessString);
-            }else {
-                currentTraining.setSuccess(true);
-                helper.updateUsertrainingsStatus(currentTraining.getId(), true);
-                String newSuccessString = "Erl.";
-                success.setText(newSuccessString);
-            }
-        });
+        textViewIntesity.setText(currentTraining.getIntensity());
+        textViewMet.setText(String.valueOf(currentTraining.getMetValue()));
+        String success = currentTraining.getSuccess() == true ? "Beendet" : "Offen";
+        textViewSucc.setText(success);
 
         return convertView;
     }

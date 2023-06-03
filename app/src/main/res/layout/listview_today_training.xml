@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/listItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,57 +9,34 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:text="TextView"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewLVIntensity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:text="TextView"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textViewLVDuration"
+        android:id="@+id/textViewLVMetValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:text="TextView"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewLVSuccess"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:layout_weight="1"
         android:text="TextView"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
-
-    <Button
-        android:id="@+id/buttonChangeSuccess"
-        android:layout_width="2dp"
-        android:layout_height="40dp"
-        android:layout_weight="0.6"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:text="✅ / ❌"
-        android:textSize="8sp" />
-
+        android:textAlignment="textStart"
+        android:textSize="16sp" />
 </LinearLayout>
