@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
                 maxValueWeek = 10000;
                 break;
             default:
-                maxValueWeek = 3999;
+                maxValueWeek = 5000;
         }
 
         double maxValuetoday = maxValueWeek / 7;
