@@ -10,6 +10,7 @@ public class Training implements Serializable {
     private final String name;
     private String intensity;
     private double metValue;
+    private double duration;
 
     private boolean selected;
 
@@ -60,6 +61,14 @@ public class Training implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
     }
 
 }
