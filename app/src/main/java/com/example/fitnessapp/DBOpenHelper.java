@@ -23,10 +23,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
-    private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
+    private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
-    private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
+    private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, duration DECIMAL(3,2), success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
     private final String CREATE_TABLE_TRAININGSPLAN = "CREATE TABLE trainingsplan (_id INTEGER PRIMARY KEY, name VARCHAR(255), idTraining INTEGER, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
     private final String CREATE_TRAININGS = "INSERT INTO trainings VALUES" +
             "(1, \"Laufen\", \"Langsam\", 9)," +
@@ -107,8 +107,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         ArrayList<TodayTraining> todayTrainingsList = new ArrayList<>();
         Cursor cursor = getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, Date.valueOf(String.valueOf(LocalDate.now())), Date.valueOf(String.valueOf(LocalDate.now()))), null);
         while(cursor.moveToNext()) {
-            boolean success = cursor.getInt(4) == 0 ? false : true;
-            todayTrainingsList.add(new TodayTraining(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), success));
+            boolean success = cursor.getInt(5) == 0 ? false : true;
+            todayTrainingsList.add(new TodayTraining(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), cursor.getDouble(4), success));
         }
         return todayTrainingsList;
     }

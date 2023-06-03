@@ -6,14 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -57,13 +53,13 @@ public class AdapterTodayTraining extends BaseAdapter {
 
         TextView textViewName = (TextView) convertView.findViewById(R.id.textViewLVName);
         TextView textViewIntensity = (TextView) convertView.findViewById(R.id.textViewLVIntensity);
-        TextView textViewMet = (TextView) convertView.findViewById(R.id.textViewLVMetValue);
+        TextView textViewDur = (TextView) convertView.findViewById(R.id.textViewLVDuration);
         TextView success = (TextView) convertView.findViewById(R.id.textViewLVSuccess);
         Button changeSuccess = (Button) convertView.findViewById(R.id.buttonChangeSuccess);
 
         textViewName.setText(currentTraining.getName());
         textViewIntensity.setText(currentTraining.getIntensity());
-        textViewMet.setText(String.valueOf(currentTraining.getMetValue()));
+        textViewDur.setText(String.valueOf(currentTraining.getDuration()));
         String successString = currentTraining.getSuccess() == true ? "Erl." : "Offen";
         success.setText(successString);
 
