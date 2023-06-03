@@ -28,4 +28,8 @@ public class TrainingsPlan {
     public String toString() {
         return name + " " + trainingsList.toString();
     }
+
+    public String getName() {
+        return name;
+    }
 }
