@@ -26,7 +26,7 @@ public class TrainingsPlan {
     @NonNull
     @Override
     public String toString() {
-        return name + " " + trainingsList.toString();
+        return name + " " + trainingsList;
     }
 
     public String getName() {

@@ -6,27 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.data.AdapterTrainingPlan;
 import com.example.fitnessapp.databinding.FragmentDashboardBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
-
+    private DBOpenHelper helper;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        binding = FragmentDashboardBinding.inflate(inflater);
+        helper = new DBOpenHelper(getContext());
 
 
         binding.infoTrainingsPlanBtn.setOnClickListener(this::showInfoForNewTrainingDay);
@@ -39,18 +38,34 @@ public class DashboardFragment extends Fragment {
 
         binding.newTraingBtn.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(DashboardFragmentDirections.actionNavigationDashboardToNewTrainingFragment()));
-        return root;
+
+
+        AdapterTrainingPlan adapterTrainingPlan = new AdapterTrainingPlan(getContext(),
+                                                                          helper.selectAllFromTrainingsplan()
+        );
+
+        Bundle bundle = new Bundle();
+
+        binding.listViewTrainingPlan.setAdapter(adapterTrainingPlan);
+
+        binding.listViewTrainingPlan.setOnItemClickListener((parent, view, position, id) -> {
+            String name = adapterTrainingPlan.getName(position);
+            bundle.putString("trainingPlan", name);
+
+            Navigation.findNavController(view).navigate(R.id.action_navigation_dashboard_to_addTrainingFromTrainingsPlanFragment, bundle);
+
+        });
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     private void showInfoForNewTraining(View view) {
         Snackbar.make(view, R.string.snackbar_training_info, Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
         }).show();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
 

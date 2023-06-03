@@ -16,11 +16,11 @@ public class Training implements Serializable {
 
     private Timestamp timestamp;
 
-    public Training(int id, String name, String type, double speed) {
+    public Training(int id, String name, String intensity, double metValue) {
         this.id = id;
         this.name = name;
-        this.intensity = type;
-        this.metValue = speed;
+        this.intensity = intensity;
+        this.metValue = metValue;
     }
 
     public int getId() {

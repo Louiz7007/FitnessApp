@@ -2,11 +2,11 @@ package com.example.fitnessapp.data;
 
 public class TodayTraining {
 
-    private int id;
-    private String name;
-    private String intensity;
-    private double duration;
-    private double metValue;
+    private final int id;
+    private final String name;
+    private final String intensity;
+    private final double duration;
+    private final double metValue;
     private boolean success;
 
     public TodayTraining(int id, String name, String type, double duration, double metValue, boolean success) {

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_newTrainingFragment"
             app:destination="@id/newTrainingFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_addTrainingFromTrainingsPlanFragment"
+            app:destination="@id/addTrainingFromTrainingsPlanFragment" />
     </fragment>
 
     <fragment
@@ -47,10 +50,19 @@
         android:id="@+id/newTraingsPlanWithTrainingFragment"
         android:name="com.example.fitnessapp.ui.dashboard.NewTraingsPlanWithTrainingFragment"
         android:label="Neuer Trainingsplan"
-        tools:layout="@layout/fragment_new_traings_plan_with_training" />
+        tools:layout="@layout/fragment_new_traings_plan_with_training" >
+        <action
+            android:id="@+id/action_newTraingsPlanWithTrainingFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/newTrainingFragment"
         android:name="com.example.fitnessapp.ui.dashboard.NewTrainingFragment"
         android:label="Neues Training"
         tools:layout="@layout/fragment_new_training" />
+    <fragment
+        android:id="@+id/addTrainingFromTrainingsPlanFragment"
+        android:name="com.example.fitnessapp.AddTrainingFromTrainingsPlanFragment"
+        android:label="Füge Trainings aus deinem Trainingsplan hinzu"
+        tools:layout="@layout/fragment_add_training_from_trainings_plan" />
 </navigation>
