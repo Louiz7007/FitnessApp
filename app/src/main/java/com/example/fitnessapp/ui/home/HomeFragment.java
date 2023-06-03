@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fitnessapp.DBOpenHelper;
+import com.example.fitnessapp.ProfileActivity;
 import com.example.fitnessapp.R;
 import com.example.fitnessapp.data.AdapterTodayTraining;
 import com.example.fitnessapp.data.AdapterTraining;
@@ -67,10 +68,11 @@ public class HomeFragment extends Fragment {
         helper = new DBOpenHelper(getActivity());
         final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        // TEST-Daten TODO LD später entfernen
 //        helper.deleteUsertrainings();
-//        helper.insertUserTraining(1, sdf3.format(timestamp), false);
-//        helper.insertUserTraining(2, sdf3.format(timestamp), false);
-//        helper.insertUserTraining(3, sdf3.format(timestamp), false);
+//        helper.insertUserTraining(1, sdf3.format(timestamp), 1, false);
+//        helper.insertUserTraining(2, sdf3.format(timestamp), 0.5, false);
+//        helper.insertUserTraining(3, sdf3.format(timestamp), 1.25, false);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -84,6 +86,23 @@ public class HomeFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        showDayProgress(homeViewModel);
+
+        final ProgressBar progressBar = binding.progressBarDay;
+        homeViewModel.getProgress().observe(getViewLifecycleOwner(), progressBar::setProgress);
+
+        binding.imageButtonArrowLeft.setOnClickListener(v -> {
+            showDayProgress(homeViewModel);
+        });
+
+        binding.imageButtonArrowRight.setOnClickListener(v -> {
+            showWeekProgress(homeViewModel);
+        });
+
+        return binding.getRoot();
+    }
+
+    public double getMaxValueWeek() {
         double maxValueWeek = 0;
         Integer workoutlevel = helper.selectWorkoutlevel();
         switch (workoutlevel){
@@ -96,24 +115,33 @@ public class HomeFragment extends Fragment {
             case 3:
                 maxValueWeek = 7999;
                 break;
-            case 4:
+            case 0:
                 maxValueWeek = 10000;
                 break;
             default:
                 maxValueWeek = 5000;
         }
+        return maxValueWeek;
+    }
 
-        double maxValuetoday = maxValueWeek / 7;
+    private void showDayProgress(HomeViewModel viewModel) {
 
-//        double sum = new TodayTrainingList(helper).getSumOfMetValue();
-//        int progress = (int) Math.round(sum / maxValuetoday * 100);
-//        binding.progressBarDay.setProgress(progress);
+        // 0 = hoch; 3 = mittel; 2 = niedrig; 1 = ungenügend
 
-        final TextView textView = binding.viewProgress;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        double maxValuetoday = getMaxValueWeek() / 7;
 
+        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+        int progress = (int) Math.round(sum / maxValuetoday * 100);
+        double roundOff = Math.round(maxValuetoday * 100.0) / 100.0;
+        viewModel.setmProgress(progress);
+        binding.viewProgress.setText(String.format("Tagesfortschritt in MET-Minuten\n(%s / %s)", sum, roundOff));
+    }
 
-        return binding.getRoot();
+    private void showWeekProgress(HomeViewModel viewModel) {
+        double sum = helper.selectUsertrainingsThisWeek();
+        int progress = (int) Math.round(sum / getMaxValueWeek() * 100);
+        viewModel.setmProgress(progress);
+        binding.viewProgress.setText(String.format("Wochenfortschritt in MET-Minuten \n(%s / %s)", sum, getMaxValueWeek()));
     }
 
     @Override

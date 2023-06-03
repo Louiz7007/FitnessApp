@@ -17,12 +17,14 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "FitnessDB";
     private static final int DATABASE_VERSION = 1;
 
+    private String SELECT_SUM_METVALUE_THIS_WEEK = "SELECT metValue, duration FROM usertrainings INNER JOIN trainings ON usertrainings.idTraining = trainings._id WHERE strftime(\'%W\', DATE(datetime)) == strftime(\'%W\', \'now\') AND success = \'1\';";
     private String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM trainingsplan INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
     private String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name = %s";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
@@ -106,13 +108,23 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into user_Table: " + rowId);
     }
 
-    public void insertUserTraining(int idTraining, String datetime, boolean success) {
+    public void insertUserTraining(int idTraining, String datetime, double duration, boolean success) {
         ContentValues values = new ContentValues();
         values.put("idTraining", idTraining);
         values.put("datetime", datetime);
+        values.put("duration", duration);
         values.put("success", success);
         long rowId = getWritableDatabase().insert("usertrainings", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
+    }
+
+    public double selectUsertrainingsThisWeek() {
+        Cursor cursor = getReadableDatabase().rawQuery(SELECT_SUM_METVALUE_THIS_WEEK, null);
+        double sum = 0;
+        while(cursor.moveToNext()) {
+            sum+= cursor.getDouble(0) * 60 * cursor.getDouble(1);
+        }
+        return sum;
     }
 
     public void insertUserTrainingWithTrainingObject(Training training) {
