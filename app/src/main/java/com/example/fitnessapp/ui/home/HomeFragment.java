@@ -14,27 +14,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.data.AdapterTodayTraining;
+import com.example.fitnessapp.data.AdapterTraining;
+import com.example.fitnessapp.data.TodayTraining;
+import com.example.fitnessapp.data.TodayTrainingList;
+import com.example.fitnessapp.data.Training;
+import com.example.fitnessapp.data.TrainingList;
 import com.example.fitnessapp.databinding.FragmentHomeBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -51,9 +65,12 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
-
-        helper.testDatensatzZwei();
-        cursor = helper.selectTodaysTraining();
+        final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        helper.deleteUsertrainings();
+//        helper.insertUserTraining(1, sdf3.format(timestamp), false);
+//        helper.insertUserTraining(2, sdf3.format(timestamp), false);
+//        helper.insertUserTraining(3, sdf3.format(timestamp), false);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,21 +84,34 @@ public class HomeFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        double maxValueWeek = 0;
+        Integer workoutlevel = helper.selectWorkoutlevel();
+        switch (workoutlevel){
+            case 1:
+                maxValueWeek = 600;
+                break;
+            case 2:
+                maxValueWeek = 3999;
+                break;
+            case 3:
+                maxValueWeek = 7999;
+                break;
+            case 4:
+                maxValueWeek = 10000;
+                break;
+            default:
+                maxValueWeek = 5000;
+        }
+
+        double maxValuetoday = maxValueWeek / 7;
+
+//        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+//        int progress = (int) Math.round(sum / maxValuetoday * 100);
+//        binding.progressBarDay.setProgress(progress);
+
         final TextView textView = binding.viewProgress;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        cursor = helper.selectTodaysTraining();
-        ArrayList<String> trainingList = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            String success = +cursor.getInt(3) == 0 ? "Offen" : "Beendet";
-            trainingList.add(cursor.getString(0) + " | " + cursor.getString(1) +
-                                     " | " + cursor.getString(2) + " | " + success);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
-                                                          trainingList);
-        binding.trainingsListView.setAdapter(adapter);
-        binding.viewProgress.setOnClickListener(v -> {
-          //  helper.deleteUserTrainingAndTrainings();
-        });
+
 
         return binding.getRoot();
     }
@@ -107,6 +137,32 @@ public class HomeFragment extends Fragment {
         super.onResume();
         thread = new Thread(this::getCurrentLocation);
         thread.start();
+
+        double maxValueWeek = 0;
+        Integer workoutlevel = helper.selectWorkoutlevel();
+        switch (workoutlevel){
+            case 1:
+                maxValueWeek = 600;
+                break;
+            case 2:
+                maxValueWeek = 3999;
+                break;
+            case 3:
+                maxValueWeek = 7999;
+                break;
+            case 4:
+                maxValueWeek = 10000;
+                break;
+            default:
+                maxValueWeek = 3999;
+        }
+
+        double maxValuetoday = maxValueWeek / 7;
+
+//        binding.progressBarDay.setMax(100);
+//        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+//        int progress = (int) Math.round(sum / maxValuetoday * 100);
+//        binding.progressBarDay.setProgress(progress);
     }
 
 

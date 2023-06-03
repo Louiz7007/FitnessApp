@@ -48,7 +48,7 @@ public class AdapterTraining extends BaseAdapter {
 
         TextView textViewName = convertView.findViewById(R.id.textLVName);
         TextView textViewIntesity = convertView.findViewById(R.id.textLVIntensity);
-        TextView textViewMet = convertView.findViewById(R.id.textViewLVMetValue);
+        TextView textViewMet = convertView.findViewById(R.id.textViewLVDuration);
 
         textViewName.setText(currentTraining.getName());
         textViewIntesity.setText(currentTraining.getIntensity());
