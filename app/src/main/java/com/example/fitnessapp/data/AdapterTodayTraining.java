@@ -51,16 +51,16 @@ public class AdapterTodayTraining extends BaseAdapter {
 
         TodayTraining currentTraining = (TodayTraining) getItem(position);
 
-        TextView textViewName = (TextView) convertView.findViewById(R.id.textViewLVName);
-        TextView textViewIntensity = (TextView) convertView.findViewById(R.id.textViewLVIntensity);
-        TextView textViewDur = (TextView) convertView.findViewById(R.id.textViewLVDuration);
-        TextView success = (TextView) convertView.findViewById(R.id.textViewLVSuccess);
-        Button changeSuccess = (Button) convertView.findViewById(R.id.buttonChangeSuccess);
+        TextView textViewName = convertView.findViewById(R.id.textViewLVName);
+        TextView textViewIntensity = convertView.findViewById(R.id.textViewLVIntensity);
+        TextView textViewDur = convertView.findViewById(R.id.textViewLVDuration);
+        TextView success = convertView.findViewById(R.id.textViewLVSuccess);
+        Button changeSuccess = convertView.findViewById(R.id.buttonChangeSuccess);
 
         textViewName.setText(currentTraining.getName());
         textViewIntensity.setText(currentTraining.getIntensity());
         textViewDur.setText(String.valueOf(currentTraining.getDuration()));
-        String successString = currentTraining.getSuccess() == true ? "Erl." : "Offen";
+        String successString = currentTraining.getSuccess() ? "Erl." : "Offen";
         success.setText(successString);
 
         changeSuccess.setOnClickListener(v -> {

@@ -33,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
         binding.buttonCreateProfile.setOnClickListener(v -> {
             if (checkInputValues(v)) {
                 createProfile();
+                this.setFinishOnTouchOutside(false);
                 startActivity(new Intent(this, MainActivity.class));
             }
         });
@@ -41,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void checkForExisitngProfile() {
         if (helper.userExists()) {
             helper.close();
+            this.setFinishOnTouchOutside(false);
             startActivity(new Intent(this, MainActivity.class));
         }
 

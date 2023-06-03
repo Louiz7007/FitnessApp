@@ -28,7 +28,7 @@
     <string name="blank_input_msg_alert">Sie haben vergessen was einzugeben</string>
     <string name="erstelle_neues_training">Erstelle Neues Training</string>
     <string name="erstelle_neuen_trainingsplan">Erstelle Neuen Trainingsplan</string>
-    <string name="add_available_traings">Verfügbare Trainingspläne</string>
+    <string name="add_available_traings">Klicke auf deine verfügbaren Trainingspläne</string>
 
     <!-- Trainings Today -->
     <string name="training_art">Art</string>
@@ -52,5 +52,7 @@
     <string name="new_training_msg">Füge ein Training hinzu</string>
     <string name="selectNewTraining_msg">Wähle ein Training aus:</string>
     <string name="newTraining_msg">Füge ein Training hinzu!</string>
+    <string name="trainingsplan_exists_msg">Name für den Trainingsplan existiert bereits! Geben Sie</string>
+    <string name="trainingsplan_success_msg">Trainingsplan wurde erfolgreich erstellt!</string>
 
 </resources>

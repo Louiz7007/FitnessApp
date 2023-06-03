@@ -1,14 +1,14 @@
 package com.example.fitnessapp.ui.dashboard;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
 import com.example.fitnessapp.data.AdapterTrainingWithCheckbox;
 import com.example.fitnessapp.data.Training;
@@ -23,15 +23,18 @@ import java.util.ArrayList;
 public class NewTraingsPlanWithTrainingFragment extends Fragment {
 
     private FragmentNewTraingsPlanWithTrainingBinding binding;
+    private DBOpenHelper helper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentNewTraingsPlanWithTrainingBinding.inflate(getLayoutInflater());
+        helper = new DBOpenHelper(getContext());
 
         ArrayList<Training> trainingList = new TrainingList().getTrainingList();
 
-        AdapterTrainingWithCheckbox adapterTraining = new AdapterTrainingWithCheckbox(binding.getRoot().getContext(), trainingList);
+        AdapterTrainingWithCheckbox adapterTraining =
+                new AdapterTrainingWithCheckbox(binding.getRoot().getContext(), trainingList);
 
         binding.listViewWithCheckboxes.setAdapter(adapterTraining);
 
@@ -43,26 +46,34 @@ public class NewTraingsPlanWithTrainingFragment extends Fragment {
 
         binding.createTrainingsPlanBtn.setOnClickListener(v -> {
 
-            if (adapterTraining.getSelectedTrainingList().isEmpty()){
+            if (adapterTraining.getSelectedTrainingList().isEmpty()) {
                 Snackbar.make(v, "Geben Sie mindestens ein Training ein!", Snackbar.LENGTH_LONG).show();
-                return;
             }
+            else {
 
-            adapterTraining.getSelectedTrainingList().forEach(training -> {
+                adapterTraining.getSelectedTrainingList().forEach(trainingsPlan::addTraining);
 
-
-                trainingsPlan.addTraining(training);
-            });
-
-            //WRITE trainingsPlan to DB
-
-            });
-
+                helper.inserTrainingsplanWithObject(trainingsPlan);
+                showSuccessMsg();
+                clearBackStack();
+                Navigation.findNavController(v).navigate(R.id.navigation_dashboard);
+            }
+        });
 
 
     }
 
+    private void clearBackStack() {
 
+        Navigation.findNavController(binding.getRoot()).popBackStack(R.id.navigation_dashboard,
+                                                                     false);
+    }
+
+    private void showSuccessMsg() {
+        Snackbar.make(binding.getRoot(), R.string.trainingsplan_success_msg,
+                      Snackbar.LENGTH_LONG).show();
+
+    }
 
 
     @Override
