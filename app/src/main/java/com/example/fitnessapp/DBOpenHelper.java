@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.fitnessapp.data.TodayTraining;
 import com.example.fitnessapp.data.Training;
+import com.example.fitnessapp.data.TrainingsPlan;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -22,6 +23,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "FitnessDB";
     private static final int DATABASE_VERSION = 1;
 
+    private String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM trainingsplan INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
+    private String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name = %s";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
     private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
@@ -65,12 +68,25 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         getWritableDatabase().insert("trainingsplan", null, values);
     }
 
+    public void inserTrainingsplanWithObject(TrainingsPlan trainingsPlan) {
+        for(Training training : trainingsPlan.getTrainingsList()){
+            ContentValues values = new ContentValues();
+            values.put("name", trainingsPlan.getName());
+            values.put("idTraining", training.getId());
+            getWritableDatabase().insert("trainingsplan", null, values);
+        }
+    }
+
     public void deleteTrainingsplanByName(String name) {
         getWritableDatabase().delete("trainingsplan", name + "=" + name,null);
     }
 
     public Cursor selectAllFromTrainingsplan() {
-        return getWritableDatabase().rawQuery("SELECT * FROM trainingsplan", null);
+        return getWritableDatabase().rawQuery("SELECT DISTINCT * FROM trainingsplan", null);
+    }
+
+    public Cursor selectAllFromTrainingsplanWithTrainingsByName(String name) {
+        return getReadableDatabase().rawQuery(String.format(SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME, name), null);
     }
 
     @Override
@@ -168,6 +184,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     public boolean userExists() {
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM user", null);
+        boolean result = cursor.moveToNext();
+        cursor.close();
+        return result;
+    }
+
+    public boolean trainingsplanExists(String name) {
+        Cursor cursor = getReadableDatabase().rawQuery(String.format(SELECT_TRAININGSPLAN_BY_NAME, name), null);
         boolean result = cursor.moveToNext();
         cursor.close();
         return result;
