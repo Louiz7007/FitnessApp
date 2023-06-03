@@ -63,9 +63,10 @@ public class HomeFragment extends Fragment {
         helper = new DBOpenHelper(getActivity());
         final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        helper.insertUserTraining(1, sdf3.format(timestamp), true);
-        helper.insertUserTraining(2, sdf3.format(timestamp), false);
-        helper.insertUserTraining(3, sdf3.format(timestamp), true);
+//        helper.insertUserTraining(1, sdf3.format(timestamp), true);
+//        helper.insertUserTraining(2, sdf3.format(timestamp), false);
+//        helper.insertUserTraining(3, sdf3.format(timestamp), false);
+//        helper.deleteUsertrainings();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -81,16 +82,6 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.viewProgress;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-//        cursor = helper.selectTodaysTraining();
-//        ArrayList<String> trainingList = new ArrayList<>();
-//        while (cursor.moveToNext()) {
-//            String success = +cursor.getInt(3) == 0 ? "Offen" : "Beendet";
-//            trainingList.add(cursor.getString(0) + " | " + cursor.getString(1) +
-//                                     " | " + cursor.getString(2) + " | " + success);
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
-//                                                          trainingList);
-//        binding.trainingsListView.setAdapter(adapter);
 
         return binding.getRoot();
     }

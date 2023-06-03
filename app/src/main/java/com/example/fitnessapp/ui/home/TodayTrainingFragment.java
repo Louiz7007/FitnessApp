@@ -36,11 +36,10 @@ public class TodayTrainingFragment extends Fragment {
         helper = new DBOpenHelper(getContext());
         TodayTrainingList trainingList = new TodayTrainingList(helper);
 
-        AdapterTodayTraining adapterTraining = new AdapterTodayTraining(binding.getRoot().getContext(), trainingList.getTrainingList());
+        AdapterTodayTraining adapterTraining = new AdapterTodayTraining(binding.getRoot().getContext(), trainingList.getTrainingList(), helper);
 
         binding.listviewTrainings.setAdapter(adapterTraining);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
