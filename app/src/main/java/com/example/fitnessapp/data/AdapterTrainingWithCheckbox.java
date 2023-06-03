@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.fitnessapp.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -51,14 +52,23 @@ public class AdapterTrainingWithCheckbox extends BaseAdapter {
 
         TextView textViewName = convertView.findViewById(R.id.textLVName);
         TextView textViewIntesity = convertView.findViewById(R.id.textLVIntensity);
+        TextView textViewDuration = convertView.findViewById(R.id.textLVDuration);
         CheckBox checkBox = convertView.findViewById(R.id.checkBox);
+
 
         checkBox.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View v) {
+                if (checkBox.isChecked() && textViewDuration.getText().toString().isEmpty()) {
+                    checkBox.setChecked(false);
+                    Snackbar.make(v, "Geben Sie eine Dauer ein!", Snackbar.LENGTH_LONG).show();
+                return;
+                }
+
                 if (checkBox.isChecked()) {
+                    currentTraining.setDuration(Integer.parseInt(textViewDuration.getText().toString()));
                     selectedTrainingList.add(currentTraining);
                 } else {
                     selectedTrainingList.remove(currentTraining);
