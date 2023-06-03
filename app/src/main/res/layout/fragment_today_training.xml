@@ -19,6 +19,7 @@
 
             android:text="@string/registered_trainings"
             android:textAlignment="center"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
