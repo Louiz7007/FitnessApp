@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment {
 //        helper.insertUserTraining(1, sdf3.format(timestamp), 1, false);
 //        helper.insertUserTraining(2, sdf3.format(timestamp), 0.5, false);
 //        helper.insertUserTraining(3, sdf3.format(timestamp), 1.25, false);
+//        helper.insertUserTraining(4, "2023-06-01 10:10:10", 1, true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

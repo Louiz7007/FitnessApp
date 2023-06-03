@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.ui.home.HomeViewModel;
 
 import java.util.ArrayList;
 

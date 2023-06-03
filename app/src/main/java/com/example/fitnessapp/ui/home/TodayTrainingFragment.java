@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fitnessapp.DBOpenHelper;
 import com.example.fitnessapp.data.AdapterTodayTraining;
@@ -32,7 +33,6 @@ public class TodayTrainingFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         binding = FragmentTodayTrainingBinding.inflate(getLayoutInflater());
-
         helper = new DBOpenHelper(getContext());
         TodayTrainingList trainingList = new TodayTrainingList(helper);
 
