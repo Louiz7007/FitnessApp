@@ -5,14 +5,16 @@ public class TodayTraining {
     private int id;
     private String name;
     private String intensity;
+    private double duration;
     private double metValue;
     private boolean success;
 
-    public TodayTraining(int id, String name, String type, double speed, boolean success) {
+    public TodayTraining(int id, String name, String type, double duration, double metValue, boolean success) {
         this.id = id;
         this.name = name;
         this.intensity = type;
-        this.metValue = speed;
+        this.duration = duration;
+        this.metValue = metValue;
         this.success = success;
     }
 
@@ -38,4 +40,5 @@ public class TodayTraining {
         return metValue;
     }
 
+    public double getDuration() {return duration;}
 }
