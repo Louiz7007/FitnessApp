@@ -14,13 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fitnessapp.DBOpenHelper;
@@ -35,6 +38,7 @@ import com.example.fitnessapp.databinding.FragmentHomeBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -101,10 +105,9 @@ public class HomeFragment extends Fragment {
 
         double maxValuetoday = maxValueWeek / 7;
 
-        binding.progressBarDay.setMax(100);
-        double sum = new TodayTrainingList(helper).getSumOfMetValue();
-        int progress = (int) Math.round(sum / maxValuetoday * 100);
-        binding.progressBarDay.setProgress(progress);
+//        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+//        int progress = (int) Math.round(sum / maxValuetoday * 100);
+//        binding.progressBarDay.setProgress(progress);
 
         final TextView textView = binding.viewProgress;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -156,10 +159,10 @@ public class HomeFragment extends Fragment {
 
         double maxValuetoday = maxValueWeek / 7;
 
-        binding.progressBarDay.setMax(100);
-        double sum = new TodayTrainingList(helper).getSumOfMetValue();
-        int progress = (int) Math.round(sum / maxValuetoday * 100);
-        binding.progressBarDay.setProgress(progress);
+//        binding.progressBarDay.setMax(100);
+//        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+//        int progress = (int) Math.round(sum / maxValuetoday * 100);
+//        binding.progressBarDay.setProgress(progress);
     }
 
 
