@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.fitnessapp.data.TodayTraining;
+import com.example.fitnessapp.data.Training;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -94,6 +95,16 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         values.put("idTraining", idTraining);
         values.put("datetime", datetime);
         values.put("success", success);
+        long rowId = getWritableDatabase().insert("usertrainings", null, values);
+        Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
+    }
+
+    public void insertUserTrainingWithTrainingObject(Training training) {
+        ContentValues values = new ContentValues();
+        values.put("idTraining", training.getId());
+        values.put("datetime", training.getTimestamp().toString());
+        values.put("duration", training.getDuration());
+        values.put("success", false);
         long rowId = getWritableDatabase().insert("usertrainings", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into UserTrainings_Table: " + rowId);
     }
