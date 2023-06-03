@@ -48,9 +48,13 @@ public class AddNewTrainingActivity extends AppCompatActivity{
                 String month2 = "";
                 if (dayOfMonth1 < 10) {
                     day = 0 + String.valueOf(dayOfMonth1);
+                }else {
+                    day = String.valueOf(dayOfMonth1);
                 }
                 if (month1 < 10) {
                     month2 = 0 + String.valueOf(month1);
+                }else {
+                    month2 = String.valueOf(month1);
                 }
 
 
