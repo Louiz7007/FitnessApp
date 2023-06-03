@@ -119,6 +119,15 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         getWritableDatabase().update("usertrainings", values, "_id=?", new String[]{String.valueOf(id)});
     }
 
+    public Integer selectWorkoutlevel() {
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT workoutlevel FROM user", null);
+        if(cursor.moveToNext()){
+            return cursor.getInt(0);
+        }
+        return 0;
+    }
+
+
     public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
         return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, String.valueOf(idTraining), String.valueOf(date)), null);
     }

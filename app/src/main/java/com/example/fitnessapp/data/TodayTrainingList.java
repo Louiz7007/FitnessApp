@@ -20,4 +20,13 @@ public class TodayTrainingList {
         return todayTrainingsList;
     }
 
+    public double getSumOfMetValue() {
+        double sum = 0;
+        for(TodayTraining training : this.todayTrainingsList){
+            if(training.getSuccess()){
+                sum+= training.getMetValue();
+            }
+        }
+        return sum;
+    }
 }
