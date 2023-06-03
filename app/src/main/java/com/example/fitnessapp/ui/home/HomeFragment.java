@@ -63,10 +63,10 @@ public class HomeFragment extends Fragment {
         helper = new DBOpenHelper(getActivity());
         final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//        helper.insertUserTraining(1, sdf3.format(timestamp), true);
+//        helper.deleteUsertrainings();
+//        helper.insertUserTraining(1, sdf3.format(timestamp), false);
 //        helper.insertUserTraining(2, sdf3.format(timestamp), false);
 //        helper.insertUserTraining(3, sdf3.format(timestamp), false);
-//        helper.deleteUsertrainings();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -80,8 +80,35 @@ public class HomeFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        double maxValueWeek = 0;
+        Integer workoutlevel = helper.selectWorkoutlevel();
+        switch (workoutlevel){
+            case 1:
+                maxValueWeek = 600;
+                break;
+            case 2:
+                maxValueWeek = 3999;
+                break;
+            case 3:
+                maxValueWeek = 7999;
+                break;
+            case 4:
+                maxValueWeek = 10000;
+                break;
+            default:
+                maxValueWeek = 3999;
+        }
+
+        double maxValuetoday = maxValueWeek / 7;
+
+        binding.progressBarDay.setMax(100);
+        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+        int progress = (int) Math.round(sum / maxValuetoday * 100);
+        binding.progressBarDay.setProgress(progress);
+
         final TextView textView = binding.viewProgress;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
 
         return binding.getRoot();
     }
@@ -107,6 +134,32 @@ public class HomeFragment extends Fragment {
         super.onResume();
         thread = new Thread(this::getCurrentLocation);
         thread.start();
+
+        double maxValueWeek = 0;
+        Integer workoutlevel = helper.selectWorkoutlevel();
+        switch (workoutlevel){
+            case 1:
+                maxValueWeek = 600;
+                break;
+            case 2:
+                maxValueWeek = 3999;
+                break;
+            case 3:
+                maxValueWeek = 7999;
+                break;
+            case 4:
+                maxValueWeek = 10000;
+                break;
+            default:
+                maxValueWeek = 3999;
+        }
+
+        double maxValuetoday = maxValueWeek / 7;
+
+        binding.progressBarDay.setMax(100);
+        double sum = new TodayTrainingList(helper).getSumOfMetValue();
+        int progress = (int) Math.round(sum / maxValuetoday * 100);
+        binding.progressBarDay.setProgress(progress);
     }
 
 
