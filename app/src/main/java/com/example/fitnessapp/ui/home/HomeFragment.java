@@ -50,7 +50,9 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -240,6 +242,16 @@ public class HomeFragment extends Fragment {
             JSONArray weather = (JSONArray) json.get("weather");
             JSONObject obj = weather.getJSONObject(0);
             int weatherId = obj.getInt("id");
+
+            JSONObject main = json.getJSONObject("main");
+            double tempKelvin = main.getDouble("temp");
+            double tempCelcius = Math.round(tempKelvin - 273.15);
+
+            String locationString = json.getString("name");
+
+            binding.textViewLocationDate.setText(locationString + ", " + getCurrentTimeStamp());
+            binding.textViewTemperature.setText(Double.toString(tempCelcius) + "°C");
+
             if(weatherId == 800) {
                 binding.imageViewWeatherIcon.setImageResource(R.drawable.sun);
             }else {
@@ -274,6 +286,13 @@ public class HomeFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static String getCurrentTimeStamp() {
+        SimpleDateFormat formDate = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
+         String strDate = formDate.format(System.currentTimeMillis()); // option 1
+        return strDate;
     }
 
     private int getFirstDigitOfInt(int number) {
