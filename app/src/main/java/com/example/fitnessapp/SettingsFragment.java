@@ -68,6 +68,9 @@ public class SettingsFragment extends Fragment {
                 //startActivity(new Intent(this, MainActivity.class));
             }
         });
+        binding.buttonDeleteProfile.setOnClickListener(v -> {
+            deleteProfile();
+        });
     }
 
     @Override
@@ -134,5 +137,9 @@ public class SettingsFragment extends Fragment {
         }
         return false;
 
+    }
+
+    private void deleteProfile(){
+        helper.dropTableUser();
     }
 }
