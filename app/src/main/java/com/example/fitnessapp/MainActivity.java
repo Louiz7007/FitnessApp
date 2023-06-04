@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
-        int id = item.getItemId();
-        String x = (String) item.getTitle();
         return super.onOptionsItemSelected(item);
     }
 

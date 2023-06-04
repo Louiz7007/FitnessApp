@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
         user = new User(helper);
         binding.editTextFirstnameSettings.setText(user.getFirstname());
         binding.editTextLastnameSettings.setText(user.getLastname());
-        binding.editTextAgeSettings.setText(user.getAge());
+        binding.editTextAgeSettings.setText(String.valueOf(user.getAge()));
         binding.editTextWeightSettings.setText(String.valueOf(user.getWeight()));
         binding.spinnerWorkoutlevelSettings.setSelection(user.getWorkoutlevel());
         binding.infoImgUpdate.setOnClickListener(this::showInfoLong);
