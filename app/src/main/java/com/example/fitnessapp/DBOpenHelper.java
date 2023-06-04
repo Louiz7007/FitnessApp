@@ -261,6 +261,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         getWritableDatabase().delete("user", null, null);
     }
 
+    public void deleteDatabase() {
+        getWritableDatabase().delete("user", null, null);
+        getWritableDatabase().delete("usertrainings", null, null);
+        getWritableDatabase().delete("trainingsplan", null, null);
+    }
+
     public boolean userExists() {
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM user", null);
         boolean result = cursor.moveToNext();
