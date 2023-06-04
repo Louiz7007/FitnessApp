@@ -69,14 +69,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper = new DBOpenHelper(getActivity());
-        final SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        // TEST-Daten TODO LD später entfernen
-//        helper.deleteUsertrainings();
-//        helper.insertUserTraining(1, sdf3.format(timestamp), 1, false);
-//        helper.insertUserTraining(2, sdf3.format(timestamp), 0.5, false);
-//        helper.insertUserTraining(3, sdf3.format(timestamp), 1.25, false);
-//        helper.insertUserTraining(4, "2023-06-01 10:10:10", 1, true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

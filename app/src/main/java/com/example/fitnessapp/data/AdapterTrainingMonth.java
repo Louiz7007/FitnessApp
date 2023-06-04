@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.fitnessapp.R;
 
+import java.text.Format;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,15 +56,11 @@ public class AdapterTrainingMonth extends BaseAdapter {
 
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Format f = new SimpleDateFormat("EEEE");
 
-        Date date = null;
-        try {
-            date = sdf.parse(currentTraining.getTimestamp().toString());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        String date = sdf.format(currentTraining.getTimestamp());
 
-        textViewDate.setText(date.toString());
+        textViewDate.setText(f.format(currentTraining.getTimestamp()) + ", " + date);
         textViewName.setText(currentTraining.getName());
         textViewIntesity.setText(currentTraining.getIntensity());
 

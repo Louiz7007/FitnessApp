@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.example.fitnessapp.data.User;
 import com.example.fitnessapp.databinding.ActivitySettingsBinding;
@@ -23,6 +24,14 @@ public class SettingsActivity extends AppCompatActivity {
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         helper = new DBOpenHelper(binding.getRoot().getContext());
         user = new User(helper);
+
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(this,
+                        R.array.workout_levels,
+                        android.R.layout.simple_spinner_item);
+
+        binding.spinnerWorkoutlevelSettings.setAdapter(adapter);
+
         binding.editTextFirstnameSettings.setText(user.getFirstname());
         binding.editTextLastnameSettings.setText(user.getLastname());
         binding.editTextAgeSettings.setText(String.valueOf(user.getAge()));
