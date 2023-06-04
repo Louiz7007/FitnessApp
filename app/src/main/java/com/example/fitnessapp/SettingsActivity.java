@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.fitnessapp.data.User;
 import com.example.fitnessapp.databinding.ActivitySettingsBinding;
 import com.example.fitnessapp.databinding.AddNewTrainingBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,12 +15,19 @@ public class SettingsActivity extends AppCompatActivity {
     private ActivitySettingsBinding binding;
     private DBOpenHelper helper;
 
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         helper = new DBOpenHelper(binding.getRoot().getContext());
+        user = new User(helper);
+        binding.editTextFirstnameSettings.setText(user.getFirstname());
+        binding.editTextLastnameSettings.setText(user.getLastname());
+        binding.editTextAgeSettings.setText(user.getAge());
+        binding.editTextWeightSettings.setText(String.valueOf(user.getWeight()));
+        binding.spinnerWorkoutlevelSettings.setSelection(user.getWorkoutlevel());
         binding.infoImgUpdate.setOnClickListener(this::showInfoLong);
         binding.buttonChangeProfile.setOnClickListener(v -> {
             if (checkInputValues(v)) {
@@ -87,6 +95,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void deleteProfile(){
-        helper.deleteUser();
+        helper.deleteDatabase();
     }
 }
