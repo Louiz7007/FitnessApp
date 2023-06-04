@@ -135,14 +135,14 @@ public class HomeFragment extends Fragment {
         int progress = (int) Math.round(sum / maxValuetoday * 100);
         double roundOff = Math.round(maxValuetoday * 100.0) / 100.0;
         viewModel.setmProgress(progress);
-        binding.viewProgress.setText(String.format("Tagesfortschritt in MET-Minuten\n(%s / %s)", sum, roundOff));
+        binding.viewProgress.setText(String.format("Tagesfortschritt in MET-Minuten \n (%s / %s)", sum, roundOff));
     }
 
     private void showWeekProgress(HomeViewModel viewModel) {
         double sum = helper.selectUsertrainingsThisWeek();
         int progress = (int) Math.round(sum / getMaxValueWeek() * 100);
         viewModel.setmProgress(progress);
-        binding.viewProgress.setText(String.format("Wochenfortschritt in MET-Minuten \n(%s / %s)", sum, getMaxValueWeek()));
+        binding.viewProgress.setText(String.format("Wochenfortschritt in MET-Minuten \n (%s / %s)", sum, getMaxValueWeek()));
     }
 
     @Override

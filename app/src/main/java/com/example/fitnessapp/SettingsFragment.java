@@ -63,7 +63,7 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        binding.infoImgSettings.setOnClickListener(this::showInfoLong);
+        binding.infoImgUpdate.setOnClickListener(this::showInfoLong);
         binding.buttonChangeProfile.setOnClickListener(v -> {
             if (checkInputValues(v)) {
                 changeProfile();
@@ -85,7 +85,7 @@ public class SettingsFragment extends Fragment {
 
     private void showInfoLong(View view) {
 
-        Snackbar.make(view, R.string.snackbar_msg,
+        Snackbar.make(view, R.string.snackbar_MET_msg,
                 Snackbar.LENGTH_INDEFINITE).setAction("X", s -> {
         }).show();
     }

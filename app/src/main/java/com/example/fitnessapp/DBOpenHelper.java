@@ -79,6 +79,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Update a Row in the user Table
+    public void updateUser(String firstname, String lastname, int age, double weight, int workoutlevel) {
+        ContentValues values = new ContentValues();
+        values.put("firstname", firstname);
+        values.put("lastname", lastname);
+        values.put("age", age);
+        values.put("weight", weight);
+        values.put("workoutlevel", workoutlevel);
+
+        SQLiteDatabase database = getWritableDatabase();
+        long rowId = database.update("user", values, "firstname = ? AND lastname = ?", new String[]{firstname, lastname});
+        Log.d(DBOpenHelper.class.getSimpleName(), "Update user_Table: " + rowId);
+    }
+
     public void deleteTrainingsplanByName(String name) {
         getWritableDatabase().delete("trainingsplan", name + "=" + name,null);
     }
