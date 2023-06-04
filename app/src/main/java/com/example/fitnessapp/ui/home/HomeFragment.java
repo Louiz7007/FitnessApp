@@ -37,6 +37,7 @@ import com.example.fitnessapp.data.Training;
 import com.example.fitnessapp.data.TrainingList;
 import com.example.fitnessapp.databinding.FragmentHomeBinding;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -236,9 +237,37 @@ public class HomeFragment extends Fragment {
             con.disconnect();
 
             JSONObject json = new JSONObject(builder.toString());
+            JSONArray weather = (JSONArray) json.get("weather");
+            JSONObject obj = weather.getJSONObject(0);
+            int weatherId = obj.getInt("id");
+            weatherId = 506;
+            if(weatherId == 800) {
+                binding.imageViewWeatherIcon.setImageResource(R.drawable.sun);
+            }else {
+                int firstDigit = getFirstDigitOfInt(weatherId);
+                switch (firstDigit) {
+                    case 2:
+                        binding.imageViewWeatherIcon.setImageResource(R.drawable.thunderstorm);
+                        break;
+                    case 3:
+                        binding.imageViewWeatherIcon.setImageResource(R.drawable.drizzle);
+                        break;
+                    case 5:
+                        binding.imageViewWeatherIcon.setImageResource(R.drawable.rain);
+                        break;
+                    case 6:
+                        binding.imageViewWeatherIcon.setImageResource(R.drawable.snow);
+                        break;
+                    case 7:
+                        binding.imageViewWeatherIcon.setImageResource(R.drawable.atmosphere);
+                        break;
+                    case 8:
+                        binding.imageViewWeatherIcon.setImageResource(R.drawable.cloud);
+                        break;
+                }
+            }
 
-
-            binding.viewProgress.setText(json.toString());
+//            binding.viewProgress.setText(json.toString());
 
             manager.removeUpdates(listener);
 
@@ -246,6 +275,16 @@ public class HomeFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private int getFirstDigitOfInt(int number) {
+        int firstDigit = 0;
+        while(number != 0)
+        {
+            firstDigit = number % 10;
+            number = number / 10;
+        }
+        return firstDigit;
     }
 
 }
