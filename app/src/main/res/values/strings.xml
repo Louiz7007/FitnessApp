@@ -32,4 +32,7 @@
         <item>hoch</item>
     </string-array>
 
+    <!-- Settings -->
+    <string name="change_profile">Profil anpassen</string>
+    <string name="button_change_profile">Profil anpassen</string>
 </resources>

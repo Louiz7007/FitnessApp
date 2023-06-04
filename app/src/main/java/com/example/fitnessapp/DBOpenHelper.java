@@ -1,7 +1,6 @@
 package com.example.fitnessapp;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,9 +23,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
     private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
-    public DBOpenHelper(@Nullable Context context) {
+    public DBOpenHelper(@Nullable ProfileActivity context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+    //public DBOpenHelper(@Nullable SettingsFragment context) {
+    //    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    //}
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -51,6 +53,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         long rowId = getWritableDatabase().insert("user", null, values);
         Log.d(DBOpenHelper.class.getSimpleName(), "Insert into user_Table: " + rowId);
     }
+    // Update a Row in the user Table
+    public void updateUser(String firstname, String lastname, int age, double weight, int workoutlevel) {
+        ContentValues values = new ContentValues();
+        values.put("firstname", firstname);
+        values.put("lastname", lastname);
+        values.put("age", age);
+        values.put("weight", weight);
+        values.put("workoutlevel", workoutlevel);
+
+        SQLiteDatabase database = getWritableDatabase();
+        long rowId = database.update("user", values, "firstname = ? AND lastname = ?", new String[]{firstname, lastname});
+        Log.d(DBOpenHelper.class.getSimpleName(), "Update user_Table: " + rowId);
+    }
+
 
     // Insert a Row into the Trainings Table
     public void insertTraining(String trainingName, String intensity, double metValue) {
