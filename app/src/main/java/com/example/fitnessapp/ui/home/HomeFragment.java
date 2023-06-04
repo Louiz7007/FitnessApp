@@ -240,7 +240,6 @@ public class HomeFragment extends Fragment {
             JSONArray weather = (JSONArray) json.get("weather");
             JSONObject obj = weather.getJSONObject(0);
             int weatherId = obj.getInt("id");
-            weatherId = 506;
             if(weatherId == 800) {
                 binding.imageViewWeatherIcon.setImageResource(R.drawable.sun);
             }else {
