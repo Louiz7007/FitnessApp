@@ -1,4 +1,4 @@
-package com.example.fitnessapp;
+package com.example.fitnessapp.ui.dashboard;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -6,14 +6,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import com.example.fitnessapp.DBOpenHelper;
+import com.example.fitnessapp.R;
 import com.example.fitnessapp.data.AdapterTrainingFromPlan;
+import com.example.fitnessapp.data.Training;
 import com.example.fitnessapp.databinding.FragmentAddTrainingFromTrainingsPlanBinding;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -28,6 +35,7 @@ public class AddTrainingFromTrainingsPlanFragment extends Fragment {
     private String time;
     private SimpleDateFormat timeFormat;
     private Calendar calendar;
+    Timestamp timestamp;
 
     @Nullable
     @Override
@@ -110,6 +118,50 @@ public class AddTrainingFromTrainingsPlanFragment extends Fragment {
 
         binding.listViewTrainingInTrainingPlan.setAdapter(adapterTrainingFromPlan);
 
+        binding.writeTrningsToDbBtn.setOnClickListener(v -> {
+            if (binding.datePicker2.getText().toString().isEmpty()||binding.timePicker2.getText().toString().isEmpty()||checkAllDurationInputFields()){
+                Snackbar.make(v, "Alle Felder müssen befüllt werden!", Snackbar.LENGTH_LONG).show();
+                return;
+            }
+            timestamp = Timestamp.valueOf(date + " " + time + ":00.000000000");
+
+            for (int i = 0; i < binding.listViewTrainingInTrainingPlan.getChildCount(); i++) {
+                Training training = (Training) binding.listViewTrainingInTrainingPlan.getItemAtPosition(i);
+                training.setDate(timestamp);
+                EditText durationEditText = binding.listViewTrainingInTrainingPlan.getChildAt(i).findViewById(R.id.durationLV2);
+                training.setDuration(Integer.parseInt((durationEditText.getText().toString())));
+                helper.insertUserTrainingWithTrainingObject(training);
+
+            }
+            Snackbar.make(v, "Trainings wurden erfolgreich hinzugefügt!", Snackbar.LENGTH_LONG).show();
+            clearBackStack();
+            Navigation.findNavController(v).navigate(R.id.navigation_dashboard);
+        });
+
         return binding.getRoot();
     }
+
+    private boolean checkAllDurationInputFields() {
+
+for ( int i = 0; i < binding.listViewTrainingInTrainingPlan.getChildCount(); i++) {
+
+    View childView = binding.listViewTrainingInTrainingPlan.getChildAt(i);
+    EditText durationEditText = childView.findViewById(R.id.durationLV2);
+    if(durationEditText.getText().toString().isEmpty() || Integer.parseInt(durationEditText.getText().toString()) == 0){
+        return true;
+
+
+    }
+
+}
+    return false;
+    }
+
+    private void clearBackStack() {
+
+        Navigation.findNavController(binding.getRoot()).popBackStack(R.id.navigation_dashboard,
+                false);
+    }
+
+
 }

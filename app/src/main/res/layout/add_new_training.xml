@@ -92,8 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Zeit in Stunden"
-            android:inputType="number|numberDecimal" />
+            android:hint="Zeit in Minuten"
+            android:inputType="number" />
     </LinearLayout>
 
     <LinearLayout

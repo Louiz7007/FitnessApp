@@ -62,7 +62,7 @@
         tools:layout="@layout/fragment_new_training" />
     <fragment
         android:id="@+id/addTrainingFromTrainingsPlanFragment"
-        android:name="com.example.fitnessapp.AddTrainingFromTrainingsPlanFragment"
+        android:name="com.example.fitnessapp.ui.dashboard.AddTrainingFromTrainingsPlanFragment"
         android:label="Füge Trainings aus deinem Trainingsplan hinzu"
         tools:layout="@layout/fragment_add_training_from_trainings_plan" />
 </navigation>
