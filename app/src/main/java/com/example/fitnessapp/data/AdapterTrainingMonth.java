@@ -56,10 +56,14 @@ public class AdapterTrainingMonth extends BaseAdapter {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        String date = null;
-        date = sdf.format(currentTraining.getTimestamp());
+        Date date = null;
+        try {
+            date = sdf.parse(currentTraining.getTimestamp().toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
-        textViewDate.setText(date);
+        textViewDate.setText(date.toString());
         textViewName.setText(currentTraining.getName());
         textViewIntesity.setText(currentTraining.getIntensity());
 

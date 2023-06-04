@@ -138,7 +138,6 @@ public class TrainingOptionsActivity extends AppCompatActivity {
 
         binding.deleteFromDBBtn.setOnClickListener(v -> {
             helper.deleteUsertraingsByTrainingId(training.getId());
-            helper.close();
             finish();
         });
     }
