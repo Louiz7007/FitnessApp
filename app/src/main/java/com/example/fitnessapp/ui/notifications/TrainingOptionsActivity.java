@@ -55,20 +55,6 @@ public class TrainingOptionsActivity extends AppCompatActivity {
         binding.intesityTO.setText(training.getIntensity());
         binding.durationTO.setText(String.valueOf(training.getDuration()));
 
-        int month4 = training.getTimestamp().getMonth()+1;
-        String date3 = training.getTimestamp().getYear()+1900 + "-" + month4 + "-" + training.getTimestamp().getDay();
-        binding.dateTO.setText(date3);
-        int minutes = training.getTimestamp().getMinutes();
-
-        if (minutes < 10) {
-            time = training.getTimestamp().getHours() + ":0" + training.getTimestamp().getMinutes();
-
-        }
-        else {
-            time = training.getTimestamp().getHours() + ":" + training.getTimestamp().getMinutes();
-            binding.timeTO.setText(time);
-        }
-        binding.timeTO.setText(time);
 
         binding.dateTO.setOnClickListener(v -> {
 
