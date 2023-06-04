@@ -41,5 +41,12 @@ public class NotificationsFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        AdapterTrainingMonth adapter = new AdapterTrainingMonth(getContext(), helper.selectAllUserTrainingsFromNow());
+
+        binding.monthsListView.setAdapter(adapter);
+    }
 }
