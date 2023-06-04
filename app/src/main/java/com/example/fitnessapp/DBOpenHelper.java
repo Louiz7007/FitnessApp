@@ -35,7 +35,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY " +
             "KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
     private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER " +
-            "PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, duration DECIMAL(3,2), success " +
+            "PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, duration INTEGER, success " +
             "BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
     private final String CREATE_TABLE_TRAININGSPLAN = "CREATE TABLE trainingsplan (_id INTEGER " +
             "PRIMARY KEY, name VARCHAR(255), idTraining INTEGER, FOREIGN KEY (idTraining) " +
@@ -66,7 +66,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_TRAININGSPLAN);
         db.execSQL(CREATE_TABLE_USER_TRAININGS);
         db.execSQL(CREATE_TRAININGS);
-        db.execSQL("INSERT INTO trainingsplan VALUES(1, \"Monday\", 1)");
+        db.execSQL("INSERT INTO trainingsplan VALUES(1, \"Beispielstrainingsplan\", 1)");
     }
 
     // Returns all Entries of the trainings_Table
@@ -99,10 +99,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
         ArrayList<String> trainingsplanList = new ArrayList<>();
 
-        Cursor cursor = getWritableDatabase().rawQuery("SELECT DISTINCT * FROM trainingsplan",
+        Cursor cursor = getWritableDatabase().rawQuery("SELECT DISTINCT name FROM trainingsplan",
                                                        null);
+        if (cursor.getCount() == 0)  {
+            trainingsplanList.add("Keine Trainingspläne vorhanden");
+            return trainingsplanList;
+        }
         while (cursor.moveToNext()) {
-            trainingsplanList.add(cursor.getString(1));
+            trainingsplanList.add(cursor.getString(0));
         }
 
         return trainingsplanList;

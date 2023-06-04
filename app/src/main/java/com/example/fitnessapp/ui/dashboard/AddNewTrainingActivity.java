@@ -113,7 +113,7 @@ public class AddNewTrainingActivity extends AppCompatActivity {
                 Snackbar.make(v, "Geben Sie alle Felder an!", Snackbar.LENGTH_LONG).show();
                 return;
             }
-            training.setMetValue(Double.parseDouble(binding.trainingDuration.getText().toString()) * training.getMetValue());
+            training.setDuration(Integer.parseInt(binding.trainingDuration.getText().toString()));
             timestamp = Timestamp.valueOf(date + " " + time + ":00.000000000");
             training.setDate(timestamp);
             helper.insertUserTrainingWithTrainingObject(training);

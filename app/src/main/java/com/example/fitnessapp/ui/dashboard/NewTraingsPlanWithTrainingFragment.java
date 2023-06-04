@@ -47,7 +47,7 @@ public class NewTraingsPlanWithTrainingFragment extends Fragment {
         binding.createTrainingsPlanBtn.setOnClickListener(v -> {
 
             if (adapterTraining.getSelectedTrainingList().isEmpty()) {
-                Snackbar.make(v, "Geben Sie mindestens ein Training ein!", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(v, "Fügen Sie mindestens ein Training hinzu!", Snackbar.LENGTH_LONG).show();
             }
             else {
 

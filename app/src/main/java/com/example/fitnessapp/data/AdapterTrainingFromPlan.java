@@ -51,10 +51,12 @@ public class AdapterTrainingFromPlan extends BaseAdapter {
         TextView textViewName = convertView.findViewById(R.id.trainingLVName2);
         TextView textViewIntesity = convertView.findViewById(R.id.trainingIntensityLV2);
 
+
         textViewName.setText(training.getName());
         textViewIntesity.setText(training.getIntensity());
 
 
         return convertView;
     }
+
 }
