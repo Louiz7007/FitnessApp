@@ -22,29 +22,29 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "FitnessDB";
     private static final int DATABASE_VERSION = 1;
-    private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE " +
-            "trainingname = %s AND intensity = %s";
-    private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings " +
-            "WHERE date = %s AND idTraining = %s";
-    private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, " +
-            "intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON " +
-            "trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s " +
-            "00:00:00\" AND \"%s 23:59:59\"";
-    private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, " +
-            "firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), " +
-            "workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
-    private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY " +
-            "KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
-    private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER " +
-            "PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, duration INTEGER, success " +
-            "BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
-    private final String CREATE_TABLE_TRAININGSPLAN = "CREATE TABLE trainingsplan (_id INTEGER " +
-            "PRIMARY KEY, name VARCHAR(255), idTraining INTEGER, FOREIGN KEY (idTraining) " +
-            "REFERENCES trainings(_id))";
+//    private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE " +
+//            "trainingname = %s AND intensity = %s";
+//    private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings " +
+//            "WHERE date = %s AND idTraining = %s";
+//    private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, " +
+//            "intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON " +
+//            "trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s " +
+//            "00:00:00\" AND \"%s 23:59:59\"";
+//    private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, " +
+//            "firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), " +
+//            "workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
+//    private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY " +
+//            "KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
+//    private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER " +
+//            "PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, duration INTEGER, success " +
+//            "BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
+//    private final String CREATE_TABLE_TRAININGSPLAN = "CREATE TABLE trainingsplan (_id INTEGER " +
+//            "PRIMARY KEY, name VARCHAR(255), idTraining INTEGER, FOREIGN KEY (idTraining) " +
+//            "REFERENCES trainings(_id))";
 
     private String SELECT_SUM_METVALUE_THIS_WEEK = "SELECT metValue, duration FROM usertrainings INNER JOIN trainings ON usertrainings.idTraining = trainings._id WHERE strftime(\'%W\', DATE(datetime)) == strftime(\'%W\', \'now\') AND success = \'1\';";
     private String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM trainingsplan INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
-    private String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name = %s";
+    private String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name = \"%s\"";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
     private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
@@ -61,11 +61,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             "(6, \"Schwimmen\", \"Brust\", 10.3)," +
             "(7, \"Fußball\", \"Normal\", 7)," +
             "(8, \"Tennis\", \"Normal\", 7.3)";
-    private final String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM " +
-            "trainingsplan " +
-            "INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
-    private final String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name =" +
-            " '%s'";
+//    private final String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM " +
+//            "trainingsplan " +
+//            "INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
+//    private final String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name =" +
+//            " '%s'";
 
     public DBOpenHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -148,13 +148,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
         while (cursor.moveToNext()) {
             trainingsList.add(new Training(cursor.getInt(3), cursor.getString(4),
-                                           cursor.getString(5), cursor.getDouble(6)));
+                    cursor.getString(5), cursor.getDouble(6)));
         }
         return trainingsList;
-
-    public Cursor selectAllFromTrainingsplanWithTrainingsByName(String name) {
-        return getReadableDatabase().rawQuery(String.format(SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME, name), null);
     }
+
+//    public Cursor selectAllFromTrainingsplanWithTrainingsByName(String name) {
+//        return getReadableDatabase().rawQuery(String.format(SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME, name), null);
+//    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -188,7 +189,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = getReadableDatabase().rawQuery(SELECT_SUM_METVALUE_THIS_WEEK, null);
         double sum = 0;
         while(cursor.moveToNext()) {
-            sum+= cursor.getDouble(0) * 60 * cursor.getDouble(1);
+            sum+= cursor.getDouble(0) * cursor.getDouble(1);
         }
         return sum;
     }

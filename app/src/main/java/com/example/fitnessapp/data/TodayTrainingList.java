@@ -24,7 +24,7 @@ public class TodayTrainingList {
         double sum = 0;
         for(TodayTraining training : this.todayTrainingsList){
             if(training.getSuccess()){
-                sum+= training.getMetValue() * 60 * training.getDuration();
+                sum+= training.getMetValue() * training.getDuration();
             }
         }
         return sum;

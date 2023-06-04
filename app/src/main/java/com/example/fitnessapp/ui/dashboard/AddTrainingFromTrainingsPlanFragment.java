@@ -60,6 +60,7 @@ public class AddTrainingFromTrainingsPlanFragment extends Fragment {
                                                                                     dayOfMonth1) -> {
                 String day = "";
                 String month2 = "";
+                month1++;
                 if (dayOfMonth1 < 10) {
                     day = 0 + String.valueOf(dayOfMonth1);
                 }
