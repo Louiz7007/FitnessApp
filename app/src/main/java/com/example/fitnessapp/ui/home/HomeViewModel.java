@@ -10,7 +10,7 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mProgress = new MutableLiveData<>();
-        mProgress.setValue(100);
+        mProgress.setValue(0);
     }
 
     public LiveData<Integer> getProgress() {
