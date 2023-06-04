@@ -2,7 +2,7 @@
     <string name="app_name">FitnessApp</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Hinzufügen</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Tagebuch</string>
 
     <!-- Profile Strings -->
     <string name="welcome_message">Herzlich willkommen bei FitnessMania!</string>

@@ -118,7 +118,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public void deleteTrainingsplanByName(String name) {
-        getWritableDatabase().delete("trainingsplan", name + "=" + name, null);
+        getWritableDatabase().delete("trainingsplan", "name = ? ", new String[]{name});
     }
 
     public ArrayList<String> selectAllFromTrainingsplan() {
