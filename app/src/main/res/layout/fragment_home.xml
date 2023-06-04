@@ -41,7 +41,7 @@
                     android:foregroundGravity="center_vertical"
                     android:scaleX="2"
                     android:scaleY="2"
-                    android:src="@drawable/sun" />
+                    android:src="@drawable/loading_weather" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -251,7 +251,6 @@ public class HomeFragment extends Fragment {
 
             binding.textViewLocationDate.setText(locationString + ", " + getCurrentTimeStamp());
             binding.textViewTemperature.setText(Double.toString(tempCelcius) + "°C");
-
             if(weatherId == 800) {
                 binding.imageViewWeatherIcon.setImageResource(R.drawable.sun);
             }else {
