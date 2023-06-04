@@ -42,9 +42,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 //            "PRIMARY KEY, name VARCHAR(255), idTraining INTEGER, FOREIGN KEY (idTraining) " +
 //            "REFERENCES trainings(_id))";
 
-    private String SELECT_SUM_METVALUE_THIS_WEEK = "SELECT metValue, duration FROM usertrainings INNER JOIN trainings ON usertrainings.idTraining = trainings._id WHERE strftime(\'%W\', DATE(datetime)) == strftime(\'%W\', \'now\') AND success = \'1\';";
-    private String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM trainingsplan INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
-    private String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name = \"%s\"";
+    private final String SELECT_SUM_METVALUE_THIS_WEEK = "SELECT metValue, duration FROM usertrainings INNER JOIN trainings ON usertrainings.idTraining = trainings._id WHERE strftime('%W', DATE(datetime)) == strftime('%W', 'now') AND success = '1';";
+    private final String SELECT_TRAININGSPLAN_WITH_TRAININGS_BY_NAME = "SELECT * FROM trainingsplan INNER JOIN trainings ON trainingsplan.idTraining = trainings._id WHERE name = \"%s\";";
+    private final String SELECT_TRAININGSPLAN_BY_NAME = "SELECT * FROM trainingsplan WHERE name = \"%s\"";
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
     private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
@@ -213,7 +213,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         ArrayList<TodayTraining> todayTrainingsList = new ArrayList<>();
         Cursor cursor = getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_DATE, Date.valueOf(String.valueOf(LocalDate.now())), Date.valueOf(String.valueOf(LocalDate.now()))), null);
         while(cursor.moveToNext()) {
-            boolean success = cursor.getInt(5) == 0 ? false : true;
+            boolean success = cursor.getInt(5) != 0;
             todayTrainingsList.add(new TodayTraining(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), cursor.getDouble(4), success));
         }
         return todayTrainingsList;
@@ -235,7 +235,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
 
     public Cursor selectUserTrainingByDateAndTraining(int idTraining, Date date) {
-        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, String.valueOf(idTraining), String.valueOf(date)), null);
+        return getReadableDatabase().rawQuery(String.format(SELECT_USERTRAINING_BY_TRAINING_AND_DATE, idTraining, date), null);
     }
 
     public void deleteUsertrainings() {
