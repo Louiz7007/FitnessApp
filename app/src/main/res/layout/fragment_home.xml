@@ -26,8 +26,9 @@
 
 
             <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="match_parent"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
@@ -45,6 +46,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -53,13 +55,15 @@
                         android:id="@+id/textViewLocationDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Hannover, Lower Saxony, 03.06.2023" />
+                        android:text="@string/locationStringDefault"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/textViewTemperature"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="26°C" />
+                        android:text="@string/temperatureStringEmpty"
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
 

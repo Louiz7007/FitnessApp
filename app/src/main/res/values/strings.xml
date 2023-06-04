@@ -29,6 +29,8 @@
     <string name="erstelle_neues_training">Erstelle Neues Training</string>
     <string name="erstelle_neuen_trainingsplan">Erstelle Neuen Trainingsplan</string>
     <string name="add_available_traings">Klicke auf deine verfügbaren Trainingspläne</string>
+    <string name="locationStringDefault">Loading Location...</string>
+    <string name="temperatureStringEmpty">--.-°C</string>
 
     <!-- Trainings Today -->
     <string name="training_art">Art</string>
