@@ -1,6 +1,7 @@
 package com.example.fitnessapp;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,7 +24,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
     private final String CREATE_TABLE_USER_TRAININGS = "CREATE TABLE usertrainings (_id INTEGER PRIMARY KEY, idTraining INTEGER, datetime TIMESTAMP, success BOOLEAN, FOREIGN KEY (idTraining) REFERENCES trainings(_id))";
-    public DBOpenHelper(@Nullable ProfileActivity context) {
+    public DBOpenHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     //public DBOpenHelper(@Nullable SettingsFragment context) {
@@ -129,7 +130,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     // Drop whole user Table
-    public void dropTableUser() {
-        getWritableDatabase().rawQuery("DROP TABLE IF EXISTS user", null);
+    public void deleteUser() {
+        getWritableDatabase().delete("user", null, null);
     }
 }
