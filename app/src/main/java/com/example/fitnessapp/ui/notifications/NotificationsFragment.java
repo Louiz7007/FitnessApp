@@ -25,7 +25,7 @@ public class NotificationsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
-    helper = new DBOpenHelper(binding.getRoot().getContext());
+        helper = new DBOpenHelper(binding.getRoot().getContext());
 
         AdapterTrainingMonth adapter = new AdapterTrainingMonth(getContext(), helper.selectAllUserTrainingsFromNow());
 

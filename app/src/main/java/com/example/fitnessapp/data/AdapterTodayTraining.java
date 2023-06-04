@@ -33,7 +33,11 @@ public class AdapterTodayTraining extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return todayTrainingsList.get(position);
+
+        if(todayTrainingsList.size() > 0 && !(position >= todayTrainingsList.size())){
+            return todayTrainingsList.get(position);
+        }
+        return null;
     }
 
     @Override
@@ -51,6 +55,9 @@ public class AdapterTodayTraining extends BaseAdapter {
         todayTrainingsList = helper.selectTodaysTraining();
 
         TodayTraining currentTraining = (TodayTraining) getItem(position);
+        if(currentTraining == null) {
+            return convertView;
+        }
 
         TextView textViewName = convertView.findViewById(R.id.textViewLVName);
         TextView textViewIntensity = convertView.findViewById(R.id.textViewLVIntensity);

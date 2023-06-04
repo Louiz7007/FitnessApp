@@ -260,7 +260,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public void deleteUsertraingsByTrainingId(int id) {
-        getWritableDatabase().delete("usertrainings", "idTraining=?", new String[]{String.valueOf(id)});
+        getWritableDatabase().delete("usertrainings", "_id=?", new String[]{String.valueOf(id)});
+    }
+
+    public void deleteUserTrainingByIdAndDate(int id, Timestamp ts) {
+        getWritableDatabase().delete("usertrainings", "idTraining=? AND datetime=?", new String[]{String.valueOf(id), String.valueOf(ts)});
     }
 
     // Returns Cursor with all from trainings Table

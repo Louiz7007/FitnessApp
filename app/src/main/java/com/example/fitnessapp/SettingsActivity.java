@@ -1,8 +1,12 @@
 package com.example.fitnessapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.fitnessapp.data.User;
@@ -25,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
         user = new User(helper);
         binding.editTextFirstnameSettings.setText(user.getFirstname());
         binding.editTextLastnameSettings.setText(user.getLastname());
-        binding.editTextAgeSettings.setText(user.getAge());
+        binding.editTextAgeSettings.setText(String.valueOf(user.getAge()));
         binding.editTextWeightSettings.setText(String.valueOf(user.getWeight()));
         binding.spinnerWorkoutlevelSettings.setSelection(user.getWorkoutlevel());
         binding.infoImgUpdate.setOnClickListener(this::showInfoLong);
@@ -39,6 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
             deleteProfile();
         });
     }
+
     private void showInfoLong(View view) {
 
         Snackbar.make(view, R.string.snackbar_MET_msg,

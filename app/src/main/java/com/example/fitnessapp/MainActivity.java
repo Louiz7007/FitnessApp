@@ -47,9 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == 1){
+        if("settings".equals(item.getTitle())){
             startActivity(new Intent(this, SettingsActivity.class));
+            return true;
         }
+        int id = item.getItemId();
+        String x = (String) item.getTitle();
         return super.onOptionsItemSelected(item);
     }
 
