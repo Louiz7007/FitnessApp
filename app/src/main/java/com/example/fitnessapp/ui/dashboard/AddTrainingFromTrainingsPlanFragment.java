@@ -94,7 +94,7 @@ public class AddTrainingFromTrainingsPlanFragment extends Fragment {
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
                         getActivity(),
-                        (TimePickerDialog.OnTimeSetListener) (view, hourOfDay, minute1) -> {
+                        (view, hourOfDay, minute1) -> {
                             // Wird aufgerufen, wenn der Benutzer eine Zeit auswählt
                             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                             calendar.set(Calendar.MINUTE, minute1);
