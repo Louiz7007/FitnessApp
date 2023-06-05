@@ -8,6 +8,7 @@
         android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:gravity="center_vertical"
         android:text="TextView" />
 
     <TextView
@@ -15,6 +16,7 @@
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:text="TextView"
         android:textAlignment="center"
         android:textStyle="bold" />
@@ -24,5 +26,6 @@
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:text="TextView" />
 </LinearLayout>

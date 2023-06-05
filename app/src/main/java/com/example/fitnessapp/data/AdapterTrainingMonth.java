@@ -60,7 +60,7 @@ public class AdapterTrainingMonth extends BaseAdapter {
 
         String date = sdf.format(currentTraining.getTimestamp());
 
-        textViewDate.setText(f.format(currentTraining.getTimestamp()) + ", " + date);
+        textViewDate.setText(f.format(currentTraining.getTimestamp()) + ", \n " + date);
         textViewName.setText(currentTraining.getName());
         textViewIntesity.setText(currentTraining.getIntensity());
 

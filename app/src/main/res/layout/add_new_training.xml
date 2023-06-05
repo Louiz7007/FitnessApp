@@ -116,7 +116,8 @@
             android:allowClickWhenDisabled="true"
             android:ems="10"
             android:enabled="false"
-            android:inputType="date" />
+            android:inputType="date"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -140,7 +141,8 @@
             android:allowClickWhenDisabled="true"
             android:ems="10"
             android:enabled="false"
-            android:inputType="time" />
+            android:inputType="time"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <Button
