@@ -29,6 +29,8 @@
     <string name="erstelle_neues_training">Erstelle Neues Training</string>
     <string name="erstelle_neuen_trainingsplan">Erstelle Neuen Trainingsplan</string>
     <string name="add_available_traings">Klicke auf deine verfügbaren Trainingspläne</string>
+    <string name="delete_trainingsplan_info">(Oder halte gedrückt zum Löschen)</string>
+    <string name="edit_training_info">(Anklicken zum Bearbeiten oder Löschen)</string>
     <string name="locationStringDefault">Lade Standort...</string>
     <string name="temperatureStringEmpty">--.-°C</string>
 
@@ -37,7 +39,6 @@
     <string name="training_intensity">Intensität</string>
     <string name="training_met_value">MetValue</string>
     <string name="training_status">Status</string>
-
 
     <!-- WorkoutLevel -->
     <string-array name="workout_levels">

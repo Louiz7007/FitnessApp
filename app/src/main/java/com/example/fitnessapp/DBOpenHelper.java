@@ -50,6 +50,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private final String SELECT_TRAINING_BY_NAME_AND_INTENSITY = "SELECT * FROM training WHERE trainingname = %s AND intensity = %s";
     private final String SELECT_USERTRAINING_BY_TRAINING_AND_DATE = "SELECT * FROM usertrainings WHERE date = %s AND idTraining = %s";
     private final String SELECT_USERTRAINING_FROM_NOW = "SELECT usertrainings._id, trainingName, intensity, metValue, usertrainings.datetime, usertrainings.duration FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime >= datetime('now') ORDER BY usertrainings.datetime ASC";
+    private final String SELECT_ALL_USERTRAININGS = "SELECT usertrainings._id, trainingName, intensity, metValue, usertrainings.datetime, usertrainings.duration FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining ORDER BY usertrainings.datetime ASC";
     private final String SELECT_USERTRAINING_BY_DATE = "SELECT usertrainings._id, trainingName, intensity, duration, metValue, success FROM trainings INNER JOIN usertrainings ON trainings._id = usertrainings.idTraining WHERE usertrainings.datetime BETWEEN \"%s 00:00:00\" AND \"%s 23:59:59\"";
     private final String CREATE_TABLE_USER = "CREATE TABLE user (_id INTEGER PRIMARY KEY, firstname VARCHAR(255), lastname VARCHAR(255), age INTEGER, weight DECIMAL(5,2), workoutlevel INTEGER CHECK(workoutlevel >= 0 AND workoutlevel < 4))";
     private final String CREATE_TABLE_TRAININGS = "CREATE TABLE trainings (_id INTEGER PRIMARY KEY, trainingName VARCHAR(255), intensity VARCHAR(255), metValue DECIMAL(3, 1))";
@@ -198,7 +199,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Training> selectAllUserTrainingsFromNow(){
-        Cursor cursor = getReadableDatabase().rawQuery(SELECT_USERTRAINING_FROM_NOW, null);
+        Cursor cursor = getReadableDatabase().rawQuery(SELECT_ALL_USERTRAININGS, null);
 
         ArrayList<Training> trainingList = new ArrayList<>();
 

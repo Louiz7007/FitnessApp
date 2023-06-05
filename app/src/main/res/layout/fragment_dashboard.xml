@@ -71,6 +71,13 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/textViewDeleteTrainingsplanInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/delete_trainingsplan_info" />
+
     <ListView
         android:id="@+id/listViewTrainingPlan"
         android:layout_width="300dp"
