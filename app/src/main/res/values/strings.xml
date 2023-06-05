@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FitnessApp</string>
+    <string name="app_name">FitnessMania</string>
     <string name="title_home">Übersicht</string>
     <string name="title_dashboard">Hinzufügen</string>
     <string name="title_notifications">Tagebuch</string>
