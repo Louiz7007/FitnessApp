@@ -71,7 +71,8 @@ public class NewTraingsPlanWithTrainingFragment extends Fragment {
 
     private void showSuccessMsg() {
         Snackbar.make(binding.getRoot(), R.string.trainingsplan_success_msg,
-                      Snackbar.LENGTH_LONG).show();
+                      Snackbar.LENGTH_LONG).setAction("X", s -> {
+        }).show();
 
     }
 

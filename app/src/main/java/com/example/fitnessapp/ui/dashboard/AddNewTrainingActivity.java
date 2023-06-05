@@ -130,7 +130,8 @@ public class AddNewTrainingActivity extends AppCompatActivity {
 
     private void showSuccessMsg(View v) {
         Snackbar.make(v, "Training wurde erfolgreich hinzugefügt!",
-                      Snackbar.LENGTH_LONG).show();
+                      Snackbar.LENGTH_LONG).setAction("X", s -> {
+        }).show();
     }
 
     private void clearBackStack() {

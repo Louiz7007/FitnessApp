@@ -134,7 +134,8 @@ public class AddTrainingFromTrainingsPlanFragment extends Fragment {
                 helper.insertUserTrainingWithTrainingObject(training);
 
             }
-            Snackbar.make(v, "Trainings wurden erfolgreich hinzugefügt!", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(v, "Trainings wurden erfolgreich hinzugefügt!", Snackbar.LENGTH_LONG).setAction("X", s -> {
+            }).show();
             clearBackStack();
             Navigation.findNavController(v).navigate(R.id.navigation_dashboard);
         });
