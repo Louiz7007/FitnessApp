@@ -32,6 +32,7 @@ public class TrainingOptionsActivity extends AppCompatActivity {
     TrainingOptionActivityBinding binding;
     private Calendar calendar;
     private SimpleDateFormat timeFormat;
+    private SimpleDateFormat dateFormat;
     private DBOpenHelper helper;
     private Timestamp timestamp;
     private String date;
@@ -45,6 +46,7 @@ public class TrainingOptionsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         calendar = Calendar.getInstance();
         timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         helper = new DBOpenHelper(this);
 
 
@@ -54,6 +56,8 @@ public class TrainingOptionsActivity extends AppCompatActivity {
         binding.nameTO.setText(training.getName());
         binding.intesityTO.setText(training.getIntensity());
         binding.durationTO.setText(String.valueOf(training.getDuration()));
+        binding.dateTO.setText(dateFormat.format(training.getTimestamp()));
+        binding.timeTO.setText(timeFormat.format(training.getTimestamp()));
 
 
         binding.dateTO.setOnClickListener(v -> {

@@ -100,7 +100,8 @@
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="text"
-                android:keyboardNavigationCluster="false" />
+                android:keyboardNavigationCluster="false"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,7 +124,8 @@
                 android:allowClickWhenDisabled="true"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
