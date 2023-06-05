@@ -65,7 +65,18 @@ public class User {
     }
 
     public int getWorkoutlevel() {
-        return workoutlevel;
+        switch (workoutlevel) {
+            case 0:
+                return 3;
+            case 1:
+                return 0;
+            case 2:
+                return 1;
+            case 3:
+                return 2;
+            default:
+                return 1;
+        }
     }
 
     public void setWorkoutlevel(int workoutlevel) {

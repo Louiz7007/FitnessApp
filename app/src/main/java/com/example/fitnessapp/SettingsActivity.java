@@ -1,8 +1,13 @@
 package com.example.fitnessapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -20,8 +25,8 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         helper = new DBOpenHelper(binding.getRoot().getContext());
         user = new User(helper);
 
@@ -41,13 +46,27 @@ public class SettingsActivity extends AppCompatActivity {
         binding.buttonChangeProfile.setOnClickListener(v -> {
             if (checkInputValues(v)) {
                 changeProfile();
-                //startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
             }
         });
         binding.buttonDeleteProfile.setOnClickListener(v -> {
             deleteProfile();
+            startActivity(new Intent(this, ProfileActivity.class));
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        user = new User(helper);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
+    }
+
     private void showInfoLong(View view) {
 
         Snackbar.make(view, R.string.snackbar_MET_msg,
@@ -56,6 +75,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void changeProfile() {
+        String vorname=        binding.editTextFirstnameSettings.getText().toString();
+        String nachname =        binding.editTextLastnameSettings.getText().toString();
+       int age =         Integer.parseInt(binding.editTextAgeSettings.getText().toString());
+       double weight =        Double.parseDouble(binding.editTextWeightSettings.getText().toString());
+        int work =        getWorkoutLvl();
         helper.updateUser(
                 binding.editTextFirstnameSettings.getText().toString(),
                 binding.editTextLastnameSettings.getText().toString(),
@@ -77,7 +101,7 @@ public class SettingsActivity extends AppCompatActivity {
             case "mittel":
                 return 3;
             case "hoch":
-                return 4;
+                return 0;
 
         }
         return 0;

@@ -116,7 +116,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         values.put("workoutlevel", workoutlevel);
 
         SQLiteDatabase database = getWritableDatabase();
-        long rowId = database.update("user", values, "firstname = ? AND lastname = ?", new String[]{firstname, lastname});
+        long rowId = database.update("user", values, "_id=1", null);
         Log.d(DBOpenHelper.class.getSimpleName(), "Update user_Table: " + rowId);
     }
 

@@ -49,8 +49,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text"
-                android:text="Vorname" />
+                android:inputType="text" />
 
         </LinearLayout>
 
@@ -73,8 +72,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="text"
-                android:text="Nachname" />
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout

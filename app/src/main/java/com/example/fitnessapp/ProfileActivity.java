@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
             case "mittel":
                 return 3;
             case "hoch":
-                return 4;
+                return 0;
 
         }
         return 0;
